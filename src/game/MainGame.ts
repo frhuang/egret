@@ -20,6 +20,7 @@ class MainGame extends egret.Sprite{
     }
     public nextScene():void{
        this.clear();
+       console.log(Const.ALL_X_Y);
        var pageScene2:PageScene2 = new PageScene2();
        this.gameContainer.addChild(pageScene2);
     }

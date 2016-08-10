@@ -37,12 +37,18 @@ var PageScene1 = (function (_super) {
         drawArea.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this);
     };
     p.confirmClick = function () {
-        egret.setTimeout(function () {
-            MainGame.game.nextScene();
-        }, this, 200);
+        if (this._all_X_Y.length > 0) {
+            Const.ALL_X_Y = this._all_X_Y;
+            Const.ALL_Y_X = this._all_Y_X;
+            egret.setTimeout(function () {
+                MainGame.game.nextScene();
+            }, this, 200);
+        }
     };
     p.redrawClick = function () {
         this._shape.graphics.clear();
+        this._all_X_Y = [];
+        this._all_Y_X = [];
         this._shape.graphics.lineStyle(2, 0x000000);
     };
     p.touchStart = function (e) {

@@ -30,13 +30,11 @@ class PageScene1 extends egret.Sprite{
         redraw_btn.y = Const.SHEIGHT - 120;
         redraw_btn.setClick(this.redrawClick.bind(this));
 
-
         this._shape = new egret.Shape();
         this._shape.width = Const.SWIDTH;
         this._shape.height = Const.SHEIGHT;
         this.addChild(this._shape);
         this._shape.graphics.lineStyle(2, 0x000000);
-
 
         drawArea.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchStart, this);
         drawArea.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchMove, this);
@@ -44,12 +42,18 @@ class PageScene1 extends egret.Sprite{
 
     }
     private confirmClick():void{
-        egret.setTimeout(function(){
-            MainGame.game.nextScene();
-        }, this, 200);
+        if(this._all_X_Y.length> 0){
+            Const.ALL_X_Y = this._all_X_Y;
+            Const.ALL_Y_X = this._all_Y_X;
+            egret.setTimeout(function(){
+                MainGame.game.nextScene();
+            }, this, 200);
+        }
     }
     private redrawClick():void{
         this._shape.graphics.clear();
+        this._all_X_Y = [];
+        this._all_Y_X = [];
         this._shape.graphics.lineStyle(2, 0x000000);
     }
     private touchStart(e:egret.TouchEvent) {
