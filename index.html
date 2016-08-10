@@ -22,7 +22,7 @@
             height: 100%;
         }
     </style>
-    <script src="public/zepto.min.js"></script>
+    <script src="./public/zepto.min.js"></script>
 
     <!--这个标签为通过egret提供的第三方库的方式生成的 javascript 文件。删除 modules_files 标签后，库文件加载列表将不会变化，请谨慎操作！-->
     <!--modules_files_start-->
@@ -40,12 +40,12 @@
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
+	<script egret="game" src="bin-debug/LoadingUI.js"></script>
+	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/game/GameStart.js"></script>
 	<script egret="game" src="bin-debug/game/MainGame.js"></script>
 	<script egret="game" src="bin-debug/game/PageScene1.js"></script>
 	<script egret="game" src="bin-debug/game/PageScene2.js"></script>
-	<script egret="game" src="bin-debug/LoadingUI.js"></script>
-	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/utils/Consts.js"></script>
 	<script egret="game" src="bin-debug/utils/MyButton.js"></script>
 	<script egret="game" src="bin-debug/utils/ResourceUtils.js"></script>
@@ -65,6 +65,11 @@
          data-show-fps="true" data-show-log="false"
          data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
+    <div class="tips">
+        <div class="page-tips">
+            <div class="p1-1"></div>
+        </div>
+    </div>
 </div>
     <script>
         /**
@@ -75,5 +80,6 @@
          **/
         egret.runEgret({renderMode:"webgl", audioType:0});
     </script>
+    <script src="public/index.js"></script>
 </body>
 </html>

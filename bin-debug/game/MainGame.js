@@ -13,6 +13,7 @@ var MainGame = (function (_super) {
     };
     p.start = function () {
         this.clear();
+        showPage('p1-1');
         this._pageScene1 = new PageScene1();
         this.gameContainer.addChild(this._pageScene1);
     };

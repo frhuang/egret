@@ -1,3 +1,4 @@
+declare function showPage(className:string);
 class MainGame extends egret.Sprite{
     public static game:MainGame;
     private _startScene:GameStart;
@@ -15,6 +16,7 @@ class MainGame extends egret.Sprite{
     }
     public start():void{
         this.clear();
+        showPage('p1-1');
         this._pageScene1 = new PageScene1();
         this.gameContainer.addChild(this._pageScene1); 
     }

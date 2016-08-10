@@ -7,7 +7,7 @@ class GameStart extends egret.Sprite{
         var start_btn:MyButton = new MyButton("btn1_png", "btn1_png");
         this.addChild(start_btn);
         start_btn.x = Const.SWIDTH /2 - start_btn.width/2;
-        start_btn.y = 120;
+        start_btn.y = Const.SHEIGHT - 120;
         start_btn.setClick(this.showPage2View.bind(this));
     }
 
