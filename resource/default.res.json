@@ -1,0 +1,65 @@
+{
+	"groups": [
+		{
+			"keys": "bg_jpg,egret_icon_png,description_json,round_jpg,shoe_png,btn1_png,btn2_png,btn3_png,page1-car_png,page3-1_png,p1-area_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"name": "bg_jpg",
+			"type": "image",
+			"url": "assets/bg.jpg"
+		},
+		{
+			"name": "egret_icon_png",
+			"type": "image",
+			"url": "assets/egret_icon.png"
+		},
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "round_jpg",
+			"type": "image",
+			"url": "assets/round.jpg"
+		},
+		{
+			"name": "shoe_png",
+			"type": "image",
+			"url": "assets/shoe.png"
+		},
+		{
+			"name": "btn1_png",
+			"type": "image",
+			"url": "assets/btn1.png"
+		},
+		{
+			"name": "btn2_png",
+			"type": "image",
+			"url": "assets/btn2.png"
+		},
+		{
+			"name": "btn3_png",
+			"type": "image",
+			"url": "assets/btn3.png"
+		},
+		{
+			"name": "page1-car_png",
+			"type": "image",
+			"url": "assets/page1-car.png"
+		},
+		{
+			"name": "page3-1_png",
+			"type": "image",
+			"url": "assets/page3-1.png"
+		},
+		{
+			"name": "p1-area_png",
+			"type": "image",
+			"url": "assets/p1-area.png"
+		}
+	]
+}
