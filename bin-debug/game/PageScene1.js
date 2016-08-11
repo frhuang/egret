@@ -28,8 +28,6 @@ var PageScene1 = (function (_super) {
         redraw_btn.y = Const.SHEIGHT - 120;
         redraw_btn.setClick(this.redrawClick.bind(this));
         this._shape = new egret.Shape();
-        this._shape.width = Const.SWIDTH;
-        this._shape.height = Const.SHEIGHT;
         this.addChild(this._shape);
         this._shape.graphics.lineStyle(2, 0x000000);
         drawArea.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchStart, this);

@@ -19,7 +19,6 @@ var MainGame = (function (_super) {
     };
     p.nextScene = function () {
         this.clear();
-        console.log(Const.ALL_X_Y);
         var pageScene2 = new PageScene2();
         this.gameContainer.addChild(pageScene2);
     };

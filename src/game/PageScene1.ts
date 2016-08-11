@@ -31,8 +31,6 @@ class PageScene1 extends egret.Sprite{
         redraw_btn.setClick(this.redrawClick.bind(this));
 
         this._shape = new egret.Shape();
-        this._shape.width = Const.SWIDTH;
-        this._shape.height = Const.SHEIGHT;
         this.addChild(this._shape);
         this._shape.graphics.lineStyle(2, 0x000000);
 

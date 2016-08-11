@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,round_jpg,shoe_png,btn1_png,btn2_png,btn3_png,page1-car_png,page3-1_png,p1-area_png",
+			"keys": "bg_jpg,egret_icon_png,description_json,round_jpg,shoe_png,btn1_png,btn2_png,btn3_png,page1-car_png,page3-1_png,p1-area_png,sprites_jpg,chalu_jpg",
 			"name": "preload"
 		}
 	],
@@ -60,6 +60,16 @@
 			"name": "p1-area_png",
 			"type": "image",
 			"url": "assets/p1-area.png"
+		},
+		{
+			"name": "sprites_jpg",
+			"type": "image",
+			"url": "assets/sprites.jpg"
+		},
+		{
+			"name": "chalu_jpg",
+			"type": "image",
+			"url": "assets/chalu.jpg"
 		}
 	]
 }
