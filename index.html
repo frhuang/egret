@@ -9,10 +9,6 @@
     <meta name="screen-orientation" content="portrait"/>
     <meta name="x5-fullscreen" content="true"/>
     <meta name="360-fullscreen" content="true"/>
-    <link rel="stylesheet" href="public/style.css">
-    <script type="text/javascript">
-        !function(userAgent){var screen_w=parseInt(window.screen.width),scale=screen_w/640;if(/Android (\d+\.\d+)/.test(userAgent)){var version=parseFloat(RegExp.$1);document.write(version>2.3?'<meta name="viewport" content="width=640, initial-scale = '+scale+',user-scalable=1, minimum-scale = '+scale+', maximum-scale = '+scale+', target-densitydpi=device-dpi">':'<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');}else{document.write('<meta name="viewport" content="width=640, initial-scale = '+scale+' ,minimum-scale = '+scale+', maximum-scale = '+scale+', user-scalable=no, target-densitydpi=device-dpi">');}}(navigator.userAgent);
-    </script>
     <style>
         html, body {
             -ms-touch-action: none;
@@ -22,7 +18,6 @@
             height: 100%;
         }
     </style>
-    <script src="./public/zepto.min.js"></script>
 
     <!--这个标签为通过egret提供的第三方库的方式生成的 javascript 文件。删除 modules_files 标签后，库文件加载列表将不会变化，请谨慎操作！-->
     <!--modules_files_start-->
@@ -40,37 +35,30 @@
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
+	<script egret="game" src="bin-debug/LoadingUI.js"></script>
+	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/game/GameStart.js"></script>
 	<script egret="game" src="bin-debug/game/MainGame.js"></script>
 	<script egret="game" src="bin-debug/game/PageScene1.js"></script>
 	<script egret="game" src="bin-debug/game/PageScene2.js"></script>
-	<script egret="game" src="bin-debug/LoadingUI.js"></script>
-	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/utils/Consts.js"></script>
 	<script egret="game" src="bin-debug/utils/MyButton.js"></script>
 	<script egret="game" src="bin-debug/utils/ResourceUtils.js"></script>
 	<!--game_files_end-->
 </head>
 <body>
-<div class="app">
     <div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
          data-entry-class="Main"
-         data-orientation="auto"
+         data-orientation="portrait"
          data-scale-mode="fixedWidth"
          data-frame-rate="24"
          data-content-width="480"
          data-content-height="800"
          data-show-paint-rect="false"
          data-multi-fingered="2"
-         data-show-fps="true" data-show-log="false"
+         data-show-fps="false" data-show-log="false"
          data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
-    <div class="tips">
-        <div class="page-tips">
-            <div class="p1-1"></div>
-        </div>
-    </div>
-</div>
     <script>
         /**
          * {
@@ -80,6 +68,5 @@
          **/
         egret.runEgret({renderMode:"webgl", audioType:0});
     </script>
-    <script src="public/index.js"></script>
 </body>
 </html>

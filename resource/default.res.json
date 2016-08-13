@@ -1,75 +1,185 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,round_jpg,shoe_png,btn1_png,btn2_png,btn3_png,page1-car_png,page3-1_png,p1-area_png,sprites_jpg,chalu_jpg",
+			"keys": "description_json,btn1_png,btn2_png,btn3_png,page3-1_png,page1_1_png,page1_2_png,page1_3_png,page1_4_png,page1_5_png,page2_1_png,page2_2_png,page2_3_png,page2_4_png,page2_5_png,page2_6_png,page2_7_png,page3_1_png,page3_2_png,page4_1_png,page4_2_png,page4_3_png,page5_1_png,page5_2_png,page5_3_png,page6_1_png,page6_2_png,page7_1_png,page7_2_png,page7_3_png,page7_4_png,page7_5_png,car_json,car_png,bg_jpg",
 			"name": "preload"
 		}
 	],
 	"resources": [
 		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/btn1.png",
+			"type": "image",
+			"name": "btn1_png"
+		},
+		{
+			"url": "assets/btn2.png",
+			"type": "image",
+			"name": "btn2_png"
+		},
+		{
+			"url": "assets/btn3.png",
+			"type": "image",
+			"name": "btn3_png"
+		},
+		{
+			"url": "assets/page3-1.png",
+			"type": "image",
+			"name": "page3-1_png"
+		},
+		{
+			"url": "assets/page1_1.png",
+			"type": "image",
+			"name": "page1_1_png"
+		},
+		{
+			"url": "assets/page1_2.png",
+			"type": "image",
+			"name": "page1_2_png"
+		},
+		{
+			"url": "assets/page1_3.png",
+			"type": "image",
+			"name": "page1_3_png"
+		},
+		{
+			"url": "assets/page1_4.png",
+			"type": "image",
+			"name": "page1_4_png"
+		},
+		{
+			"url": "assets/page1_5.png",
+			"type": "image",
+			"name": "page1_5_png"
+		},
+		{
+			"url": "assets/page2_1.png",
+			"type": "image",
+			"name": "page2_1_png"
+		},
+		{
+			"url": "assets/page2_2.png",
+			"type": "image",
+			"name": "page2_2_png"
+		},
+		{
+			"url": "assets/page2_3.png",
+			"type": "image",
+			"name": "page2_3_png"
+		},
+		{
+			"url": "assets/page2_4.png",
+			"type": "image",
+			"name": "page2_4_png"
+		},
+		{
+			"url": "assets/page2_5.png",
+			"type": "image",
+			"name": "page2_5_png"
+		},
+		{
+			"url": "assets/page2_6.png",
+			"type": "image",
+			"name": "page2_6_png"
+		},
+		{
+			"url": "assets/page2_7.png",
+			"type": "image",
+			"name": "page2_7_png"
+		},
+		{
+			"url": "assets/page3_1.png",
+			"type": "image",
+			"name": "page3_1_png"
+		},
+		{
+			"url": "assets/page3_2.png",
+			"type": "image",
+			"name": "page3_2_png"
+		},
+		{
+			"url": "assets/page4_1.png",
+			"type": "image",
+			"name": "page4_1_png"
+		},
+		{
+			"url": "assets/page4_2.png",
+			"type": "image",
+			"name": "page4_2_png"
+		},
+		{
+			"url": "assets/page4_3.png",
+			"type": "image",
+			"name": "page4_3_png"
+		},
+		{
+			"url": "assets/page5_1.png",
+			"type": "image",
+			"name": "page5_1_png"
+		},
+		{
+			"url": "assets/page5_2.png",
+			"type": "image",
+			"name": "page5_2_png"
+		},
+		{
+			"url": "assets/page5_3.png",
+			"type": "image",
+			"name": "page5_3_png"
+		},
+		{
+			"url": "assets/page6_1.png",
+			"type": "image",
+			"name": "page6_1_png"
+		},
+		{
+			"url": "assets/page6_2.png",
+			"type": "image",
+			"name": "page6_2_png"
+		},
+		{
+			"url": "assets/page7_1.png",
+			"type": "image",
+			"name": "page7_1_png"
+		},
+		{
+			"url": "assets/page7_2.png",
+			"type": "image",
+			"name": "page7_2_png"
+		},
+		{
+			"url": "assets/page7_3.png",
+			"type": "image",
+			"name": "page7_3_png"
+		},
+		{
+			"url": "assets/page7_4.png",
+			"type": "image",
+			"name": "page7_4_png"
+		},
+		{
+			"url": "assets/page7_5.png",
+			"type": "image",
+			"name": "page7_5_png"
+		},
+		{
+			"name": "car_json",
+			"type": "json",
+			"url": "assets/car.json"
+		},
+		{
+			"name": "car_png",
+			"type": "image",
+			"url": "assets/car.png"
+		},
+		{
 			"name": "bg_jpg",
 			"type": "image",
 			"url": "assets/bg.jpg"
-		},
-		{
-			"name": "egret_icon_png",
-			"type": "image",
-			"url": "assets/egret_icon.png"
-		},
-		{
-			"name": "description_json",
-			"type": "json",
-			"url": "config/description.json"
-		},
-		{
-			"name": "round_jpg",
-			"type": "image",
-			"url": "assets/round.jpg"
-		},
-		{
-			"name": "shoe_png",
-			"type": "image",
-			"url": "assets/shoe.png"
-		},
-		{
-			"name": "btn1_png",
-			"type": "image",
-			"url": "assets/btn1.png"
-		},
-		{
-			"name": "btn2_png",
-			"type": "image",
-			"url": "assets/btn2.png"
-		},
-		{
-			"name": "btn3_png",
-			"type": "image",
-			"url": "assets/btn3.png"
-		},
-		{
-			"name": "page1-car_png",
-			"type": "image",
-			"url": "assets/page1-car.png"
-		},
-		{
-			"name": "page3-1_png",
-			"type": "image",
-			"url": "assets/page3-1.png"
-		},
-		{
-			"name": "p1-area_png",
-			"type": "image",
-			"url": "assets/p1-area.png"
-		},
-		{
-			"name": "sprites_jpg",
-			"type": "image",
-			"url": "assets/sprites.jpg"
-		},
-		{
-			"name": "chalu_jpg",
-			"type": "image",
-			"url": "assets/chalu.jpg"
 		}
 	]
 }

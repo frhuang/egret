@@ -1,0 +1,7 @@
+{"file":"car.png","frames":{
+"car1":{"x":0,"y":189,"w":594,"h":186,"offX":10,"offY":12,"sourceW":620,"sourceH":215},
+"car2":{"x":0,"y":0,"w":594,"h":187,"offX":10,"offY":12,"sourceW":620,"sourceH":215},
+"car3":{"x":596,"y":188,"w":594,"h":186,"offX":10,"offY":12,"sourceW":620,"sourceH":215},
+"car4":{"x":1192,"y":0,"w":594,"h":186,"offX":10,"offY":12,"sourceW":620,"sourceH":215},
+"car5":{"x":596,"y":0,"w":594,"h":186,"offX":10,"offY":12,"sourceW":620,"sourceH":215},
+"car6":{"x":1192,"y":188,"w":594,"h":186,"offX":10,"offY":13,"sourceW":620,"sourceH":215}}}

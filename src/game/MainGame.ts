@@ -10,13 +10,15 @@ class MainGame extends egret.Sprite{
         this.init();
     }
     private init():void{
+        var bg = ResourceUtils.createBitmapByName('bg_jpg');
+        this.addChild(bg);
+        
         this.gameContainer = new egret.Sprite();
         this.addChild(this.gameContainer);
         this.showStart();
     }
     public start():void{
         this.clear();
-        showPage('p1-1');
         this._pageScene1 = new PageScene1();
         this.gameContainer.addChild(this._pageScene1); 
     }
@@ -33,6 +35,8 @@ class MainGame extends egret.Sprite{
     private showStart():void{
         this.clear();
         this._startScene = new GameStart();
+        this._startScene.width = Const.SWIDTH;
+        this._startScene.height = Const.SHEIGHT;
         this.gameContainer.addChild(this._startScene);
     }
 }

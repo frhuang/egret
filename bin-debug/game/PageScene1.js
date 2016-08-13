@@ -12,7 +12,7 @@ var PageScene1 = (function (_super) {
     }
     var d = __define,c=PageScene1,p=c.prototype;
     p.init = function () {
-        var drawArea = ResourceUtils.createBitmapByName('p1-area_png');
+        var drawArea = ResourceUtils.createBitmapByName('page2_4_png');
         this.addChild(drawArea);
         drawArea.x = Const.SWIDTH / 2 - drawArea.width / 2;
         drawArea.y = Const.SHEIGHT / 2 - drawArea.height / 2;

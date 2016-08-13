@@ -7,13 +7,14 @@ var MainGame = (function (_super) {
     }
     var d = __define,c=MainGame,p=c.prototype;
     p.init = function () {
+        var bg = ResourceUtils.createBitmapByName('bg_jpg');
+        this.addChild(bg);
         this.gameContainer = new egret.Sprite();
         this.addChild(this.gameContainer);
         this.showStart();
     };
     p.start = function () {
         this.clear();
-        showPage('p1-1');
         this._pageScene1 = new PageScene1();
         this.gameContainer.addChild(this._pageScene1);
     };
@@ -30,6 +31,8 @@ var MainGame = (function (_super) {
     p.showStart = function () {
         this.clear();
         this._startScene = new GameStart();
+        this._startScene.width = Const.SWIDTH;
+        this._startScene.height = Const.SHEIGHT;
         this.gameContainer.addChild(this._startScene);
     };
     return MainGame;

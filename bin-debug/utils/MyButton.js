@@ -26,7 +26,7 @@ var MyButton = (function (_super) {
         var scaleX = (this.sp.width - this.sp.width * 0.8) / 2;
         var scaleY = (this.sp.height - this.sp.height * 0.8) / 2;
         this.tw = egret.Tween.get(this.sp);
-        this.tw.to({ "scaleX": 0.8, "scaleY": 0.8, "x": scaleX, "y": scaleY }, 40).to({ "scaleX": 1, "scaleY": 1, "x": this.noScaleX, "y": this.noScaleY }, 40).call(this.onClickHandler, this);
+        this.tw.call(this.onClickHandler, this);
     };
     p.onClickHandler = function () {
         this.onClick();

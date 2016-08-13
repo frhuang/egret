@@ -12,7 +12,7 @@ class PageScene1 extends egret.Sprite{
     }
     private init():void{
         
-        var drawArea = ResourceUtils.createBitmapByName('p1-area_png');
+        var drawArea = ResourceUtils.createBitmapByName('page2_4_png');
         this.addChild(drawArea);
         drawArea.x = Const.SWIDTH / 2 - drawArea.width / 2;
         drawArea.y = Const.SHEIGHT / 2 - drawArea.height / 2;
