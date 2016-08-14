@@ -92,10 +92,10 @@ class GameScene extends egret.DisplayObjectContainer{
         this._carAppearPos.y = height - drawArea.height / 2 + 75;
 
         this._car = new egret.Sprite();
-        this.addChild(this._car);
+        this.addChildAt(this._car, 999);
         this._car.width = Const.SWIDTH;
         this._car.height = Const.SHEIGHT;
-        this.setChildIndex(this._car, 9);
+        
 
         var confirm_btn:MyButton = new MyButton("btn2_png", "btn2_png");
         this.addChild(confirm_btn);
@@ -128,7 +128,7 @@ class GameScene extends egret.DisplayObjectContainer{
 
         this._shape = new egret.Shape();
         this._car.addChild(this._shape);
-        this._shape.graphics.lineStyle(2, 0x777574);
+        this._shape.graphics.lineStyle(5, 0x777574);
         
 
         drawArea.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.drawStart, this);
@@ -523,7 +523,7 @@ class GameScene extends egret.DisplayObjectContainer{
             this._navigation.anchorOffsetX = this._navigation.width / 2;
             this._navigation.anchorOffsetY = this._navigation.height / 2;
             this._navigation.x = xx;
-            this._navigation.y = this._rightShoe.y - 260;
+            this._navigation.y = this._rightShoe.y - 200;
             egret.Tween.get(this._navigation, {loop: true})
                 .to({scaleX: 1.6, scaleY: 1.3}, 300)
                 .to({scaleX: 1.428, scaleY: 1.428}, 300).wait(100);
@@ -621,7 +621,14 @@ class GameScene extends egret.DisplayObjectContainer{
             egret.Tween.resumeTweens(this._leftShoe);
             egret.Tween.resumeTweens(this._rightShoe);
         }, this)
-        .to({x: Const.SWIDTH}, 2000, egret.Ease.sineIn)
+        .to({x: Const.SWIDTH - 100}, 1500, egret.Ease.sineIn)
+        .call(() => {
+            this._dust.visible = false;
+            egret.Tween.resumeTweens(this._shape);
+            egret.Tween.resumeTweens(this._leftShoe);
+            egret.Tween.resumeTweens(this._rightShoe);
+        })
+        .wait(1000)
         .call(this.page6, this);
     }
     private page6():void{
@@ -664,6 +671,7 @@ class GameScene extends egret.DisplayObjectContainer{
         input.textColor = 0x292929;
         input.verticalAlign = egret.VerticalAlign.MIDDLE;
         input.type = egret.TextFieldType.INPUT;
+        input.maxChars = 6;
         input.addEventListener(egret.FocusEvent.FOCUS_IN, function (e:egret.FocusEvent) {
             this._page6Title.visible = false;
         }, this);
@@ -701,6 +709,8 @@ class GameScene extends egret.DisplayObjectContainer{
         var height = Const.SHEIGHT;
         var w = width / 2;
         this._car.x = 100;
+        console.log(this._car.y);
+
         this._car.y = this._car.y + 135;
 
         egret.Tween.resumeTweens(this._shape);
@@ -717,17 +727,6 @@ class GameScene extends egret.DisplayObjectContainer{
 
         
         this._round.y = Const.SHEIGHT - 360;
-
-        this._shareShape = new egret.Shape();
-        this.addChild(this._shareShape);
-        this.setChildIndex(this._shareShape, this.numChildren - 1);
-
-        this._share = ResourceUtils.createBitmapByName('page7_7_png');
-        this.addChild(this._share);
-        this._share.x = width - this._share.width;
-        this._share.y = 0;
-        this._share.visible = false;
-        this.setChildIndex(this._share, this.numChildren - 1);
     }
     private page7Title():void{
         var w = this._winWidth;
@@ -739,11 +738,11 @@ class GameScene extends egret.DisplayObjectContainer{
 
         var label:egret.TextField = new egret.TextField();
         this.addChild(label);
-        label.width = 80;
-        label.x = Const.SWIDTH - 330;
+        label.width = 120;
+        label.x = Const.SWIDTH - 350;
         label.y = 530;
         label.textColor = 0xf3382f;
-        label.size = 24;
+        label.size = 20;
         label.verticalAlign = egret.VerticalAlign.MIDDLE;
         label.text = this._input.text;
 
@@ -788,6 +787,15 @@ class GameScene extends egret.DisplayObjectContainer{
         shareBtn.x = w - shareBtn.width / 2;
         shareBtn.y = Const.SHEIGHT  - shareBtn.height / 2  - 70;
         shareBtn.setClick(this.shareCallback.bind(this)); 
+
+        this._shareShape = new egret.Shape();
+        this.addChild(this._shareShape);
+
+        this._share = ResourceUtils.createBitmapByName('page7_7_png');
+        this.addChild(this._share);
+        this._share.x = Const.SWIDTH - this._share.width;
+        this._share.y = 0;
+        this._share.visible = false;
     }
     private outlineCallback():void{
         alert('领取成功！');

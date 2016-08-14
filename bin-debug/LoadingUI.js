@@ -30,8 +30,8 @@ var LoadingUI = (function (_super) {
     __extends(LoadingUI, _super);
     function LoadingUI() {
         _super.call(this);
-        this.bar1Url = "resource/assets/loadingBar1.png";
-        this.bar2Url = "resource/assets/loadingBar2.png";
+        this.bar1Url = "resource/assets/loading_bar1.png";
+        this.bar2Url = "resource/assets/loading_bar2.png";
         this.carPngUrl = "resource/assets/car/car.png";
         this.carJsonUrl = "resource/assets/car/car.json";
         this._count = 0;
@@ -112,7 +112,7 @@ var LoadingUI = (function (_super) {
     p.isInitMc = function () {
         if (this._count === 2 && this._texture && this._data) {
             var mcFactory = new egret.MovieClipDataFactory(this._data, this._texture);
-            var mc = new egret.MovieClip(mcFactory.generateMovieClipData("car22"));
+            var mc = new egret.MovieClip(mcFactory.generateMovieClipData("car"));
             this.addChild(mc);
             mc.x = Const.SWIDTH - mc.width / 2;
             mc.y = Const.SHEIGHT / 2;

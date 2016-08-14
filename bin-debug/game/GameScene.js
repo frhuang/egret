@@ -60,10 +60,9 @@ var GameScene = (function (_super) {
         this._carAppearPos.x = width - drawArea.width / 2;
         this._carAppearPos.y = height - drawArea.height / 2 + 75;
         this._car = new egret.Sprite();
-        this.addChild(this._car);
+        this.addChildAt(this._car, 999);
         this._car.width = Const.SWIDTH;
         this._car.height = Const.SHEIGHT;
-        this.setChildIndex(this._car, 9);
         var confirm_btn = new MyButton("btn2_png", "btn2_png");
         this.addChild(confirm_btn);
         confirm_btn.x = width - confirm_btn.width / 2 - 120;
@@ -91,7 +90,7 @@ var GameScene = (function (_super) {
         this._tips = tips;
         this._shape = new egret.Shape();
         this._car.addChild(this._shape);
-        this._shape.graphics.lineStyle(2, 0x777574);
+        this._shape.graphics.lineStyle(5, 0x777574);
         drawArea.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.drawStart, this);
         drawArea.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.drawMove, this);
         drawArea.addEventListener(egret.TouchEvent.TOUCH_END, this.drawEnd, this);
@@ -626,6 +625,7 @@ var GameScene = (function (_super) {
         input.textColor = 0x292929;
         input.verticalAlign = egret.VerticalAlign.MIDDLE;
         input.type = egret.TextFieldType.INPUT;
+        input.maxChars = 6;
         input.addEventListener(egret.FocusEvent.FOCUS_IN, function (e) {
             this._page6Title.visible = false;
         }, this);
@@ -662,6 +662,7 @@ var GameScene = (function (_super) {
         var height = Const.SHEIGHT;
         var w = width / 2;
         this._car.x = 100;
+        console.log(this._car.y);
         this._car.y = this._car.y + 135;
         egret.Tween.resumeTweens(this._shape);
         egret.Tween.resumeTweens(this._leftShoe);
@@ -674,15 +675,6 @@ var GameScene = (function (_super) {
             .to({ y: -10 }, 500, egret.Ease.backOut)
             .call(this.page7Title, this);
         this._round.y = Const.SHEIGHT - 360;
-        this._shareShape = new egret.Shape();
-        this.addChild(this._shareShape);
-        this.setChildIndex(this._shareShape, 9999);
-        this._share = ResourceUtils.createBitmapByName('page7_7_png');
-        this.addChild(this._share);
-        this._share.x = width - this._share.width;
-        this._share.y = 0;
-        this._share.visible = false;
-        this.setChildIndex(this._share, 9999);
     };
     p.page7Title = function () {
         var w = this._winWidth;
@@ -693,8 +685,8 @@ var GameScene = (function (_super) {
         title2.y = 370;
         var label = new egret.TextField();
         this.addChild(label);
-        label.width = 80;
-        label.x = Const.SWIDTH - 330;
+        label.width = 120;
+        label.x = Const.SWIDTH - 350;
         label.y = 530;
         label.textColor = 0xf3382f;
         label.size = 24;
@@ -738,6 +730,13 @@ var GameScene = (function (_super) {
         shareBtn.x = w - shareBtn.width / 2;
         shareBtn.y = Const.SHEIGHT - shareBtn.height / 2 - 70;
         shareBtn.setClick(this.shareCallback.bind(this));
+        this._shareShape = new egret.Shape();
+        this.addChild(this._shareShape);
+        this._share = ResourceUtils.createBitmapByName('page7_7_png');
+        this.addChild(this._share);
+        this._share.x = Const.SWIDTH - this._share.width;
+        this._share.y = 0;
+        this._share.visible = false;
     };
     p.outlineCallback = function () {
         alert('领取成功！');

@@ -16,53 +16,7 @@ var Main = (function (_super) {
         Const.SWIDTH = this.stage.stageWidth;
         Const.SHEIGHT = this.stage.stageHeight;
         // this.loadLoading(this.initLoading);
-        this.loadLoading(this.initLoading);
-    };
-    p.loadLoading = function (callback) {
-        var count = 0;
-        var self = this;
-        var check = function () {
-            count++;
-            if (count == 4) {
-                callback.call(self);
-            }
-        };
-        var loader = new egret.URLLoader();
-        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
-            var loader = e.currentTarget;
-            this._mcTexture = loader.data;
-            check();
-        }, this);
-        loader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;
-        var request = new egret.URLRequest("resource/assets/car/car.png");
-        loader.load(request);
-        var loader = new egret.URLLoader();
-        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
-            var loader = e.currentTarget;
-            this._mcTexture = loader.data;
-            check();
-        }, this);
-        loader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;
-        var request = new egret.URLRequest("resource/assets/loadingBar1.png");
-        loader.load(request);
-        var loader = new egret.URLLoader();
-        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
-            var loader = e.currentTarget;
-            this._mcTexture = loader.data;
-            check();
-        }, this);
-        loader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;
-        var request = new egret.URLRequest("resource/assets/loadingBar2.png");
-        loader.load(request);
-        var loader = new egret.URLLoader();
-        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
-            var loader = e.currentTarget;
-            this._mcData = JSON.parse(loader.data);
-            check();
-        }, this);
-        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
-        var request = new egret.URLRequest("resource/assets/car/car.json");
-        loader.load(request);
+        this.initLoading();
     };
     p.initLoading = function () {
         this.loadingView = new LoadingUI();
@@ -79,7 +33,7 @@ var Main = (function (_super) {
         RES.loadConfig("resource/default.res.json", "resource/");
     };
     p.initSound = function () {
-        this._channel = this._sound.play(0);
+        // this._channel = this._sound.play(0);
     };
     /**
      * 配置文件加载完成,开始预加载preload资源组。

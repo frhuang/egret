@@ -28,8 +28,8 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 class LoadingUI extends egret.Sprite {
-    private bar1Url = "resource/assets/loadingBar1.png";
-    private bar2Url = "resource/assets/loadingBar2.png";
+    private bar1Url = "resource/assets/loading_bar1.png";
+    private bar2Url = "resource/assets/loading_bar2.png";
     private carPngUrl = "resource/assets/car/car.png";
     private carJsonUrl = "resource/assets/car/car.json";
     private _loadingBg:egret.Bitmap;
@@ -123,7 +123,7 @@ class LoadingUI extends egret.Sprite {
     private isInitMc() {
         if(this._count === 2 && this._texture && this._data) {
             var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( this._data, this._texture );
-            var mc:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData("car22") );
+            var mc:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData("car") );
             this.addChild(mc);  
             mc.x = Const.SWIDTH - mc.width / 2;
             mc.y = Const.SHEIGHT / 2;

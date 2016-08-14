@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,btn1_png,btn2_png,btn3_png,page1_1_png,page1_2_png,page1_3_png,page1_4_png,page1_5_png,page2_1_png,page2_2_png,page2_3_png,page2_4_png,page2_5_png,page2_6_png,page2_7_png,page3_1_png,page3_2_png,page4_1_png,page4_2_png,page4_3_png,page5_1_png,page5_2_png,page5_3_png,page6_1_png,page6_2_png,page7_1_png,page7_2_png,page7_3_png,page7_4_png,page7_5_png,bg_jpg,round_json,round_png,car_json,car_png,page7_6_png,page7_7_png,long_png,long_json,ka_png,ka_json,page3_3_png,page3_4_png,longnext_png,longnext_json,kanext_png,kanext_json,dust_json,dust_png,share_jpg,bg_mp3,loadingbar1_png,loadingbar2_png,page6_3_png",
+			"keys": "description_json,btn1_png,btn2_png,btn3_png,page1_1_png,page1_2_png,page1_3_png,page1_4_png,page1_5_png,page2_1_png,page2_2_png,page2_3_png,page2_4_png,page2_5_png,page2_6_png,page2_7_png,page3_1_png,page3_2_png,page4_1_png,page4_2_png,page4_3_png,page5_1_png,page5_2_png,page5_3_png,page6_1_png,page6_2_png,page7_1_png,page7_2_png,page7_3_png,page7_4_png,page7_5_png,bg_jpg,round_json,round_png,car_json,car_png,page7_6_png,page7_7_png,long_png,long_json,ka_png,ka_json,page3_3_png,page3_4_png,longnext_png,longnext_json,kanext_png,kanext_json,dust_json,dust_png,share_jpg,bg_mp3,page6_3_png,loading_bar2_png,loading_bar1_png",
 			"name": "preload"
 		}
 	],
@@ -267,19 +267,19 @@
 			"url": "assets/bg.mp3"
 		},
 		{
-			"name": "loadingbar1_png",
-			"type": "image",
-			"url": "assets/loadingbar1.png"
-		},
-		{
-			"name": "loadingbar2_png",
-			"type": "image",
-			"url": "assets/loadingbar2.png"
-		},
-		{
 			"name": "page6_3_png",
 			"type": "image",
 			"url": "assets/page6_3.png"
+		},
+		{
+			"name": "loading_bar2_png",
+			"type": "image",
+			"url": "assets/loading_bar2.png"
+		},
+		{
+			"name": "loading_bar1_png",
+			"type": "image",
+			"url": "assets/loading_bar1.png"
 		}
 	]
 }
