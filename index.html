@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>创造属于你的热爱故事</title>
+    <title>金牌“老司机”如何炼成</title>
     <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="full-screen" content="true"/>
@@ -16,6 +16,9 @@
             border: 0;
             margin: 0;
             height: 100%;
+        }
+        body{
+            max-width: 750px;
         }
     </style>
 
@@ -37,23 +40,23 @@
     <!--game_files_start-->
 	<script egret="game" src="bin-debug/LoadingUI.js"></script>
 	<script egret="game" src="bin-debug/Main.js"></script>
+	<script egret="game" src="bin-debug/game/GameScene.js"></script>
 	<script egret="game" src="bin-debug/game/GameStart.js"></script>
 	<script egret="game" src="bin-debug/game/MainGame.js"></script>
-	<script egret="game" src="bin-debug/game/PageScene1.js"></script>
-	<script egret="game" src="bin-debug/game/PageScene2.js"></script>
 	<script egret="game" src="bin-debug/utils/Consts.js"></script>
 	<script egret="game" src="bin-debug/utils/MyButton.js"></script>
 	<script egret="game" src="bin-debug/utils/ResourceUtils.js"></script>
 	<!--game_files_end-->
 </head>
 <body>
+    <div style="display:none"><img src="./resource/share.jpg" /></div>
     <div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
          data-entry-class="Main"
-         data-orientation="portrait"
+         data-orientation="auto"
          data-scale-mode="fixedWidth"
          data-frame-rate="24"
-         data-content-width="480"
-         data-content-height="800"
+         data-content-width="750"
+         data-content-height="1134"
          data-show-paint-rect="false"
          data-multi-fingered="2"
          data-show-fps="false" data-show-log="false"

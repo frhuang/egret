@@ -2,7 +2,7 @@ declare function showPage(className:string);
 class MainGame extends egret.Sprite{
     public static game:MainGame;
     private _startScene:GameStart;
-    private _pageScene1:PageScene1;
+    private _gameScene:GameScene;
     private gameContainer:egret.Sprite;
     constructor() {
         super();
@@ -12,20 +12,18 @@ class MainGame extends egret.Sprite{
     private init():void{
         var bg = ResourceUtils.createBitmapByName('bg_jpg');
         this.addChild(bg);
+        bg.width = Const.SWIDTH;
+        bg.height = Const.SHEIGHT;
         
         this.gameContainer = new egret.Sprite();
         this.addChild(this.gameContainer);
         this.showStart();
+       
     }
     public start():void{
         this.clear();
-        this._pageScene1 = new PageScene1();
-        this.gameContainer.addChild(this._pageScene1); 
-    }
-    public nextScene():void{
-       this.clear();
-       var pageScene2:PageScene2 = new PageScene2();
-       this.gameContainer.addChild(pageScene2);
+        this._gameScene = new GameScene();
+        this.gameContainer.addChild(this._gameScene); 
     }
     private clear():void{
        while(this.gameContainer.numChildren){
@@ -35,8 +33,6 @@ class MainGame extends egret.Sprite{
     private showStart():void{
         this.clear();
         this._startScene = new GameStart();
-        this._startScene.width = Const.SWIDTH;
-        this._startScene.height = Const.SHEIGHT;
         this.gameContainer.addChild(this._startScene);
     }
 }

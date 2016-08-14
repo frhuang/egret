@@ -2,6 +2,7 @@ var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
         _super.call(this);
+        this._audioStatus = true;
         this._touchStatus = false;
         this._distance = new egret.Point();
         this._x = [];
@@ -14,12 +15,71 @@ var Main = (function (_super) {
         //Config to load process interface
         Const.SWIDTH = this.stage.stageWidth;
         Const.SHEIGHT = this.stage.stageHeight;
+        // this.loadLoading(this.initLoading);
+        this.loadLoading(this.initLoading);
+    };
+    p.loadLoading = function (callback) {
+        var count = 0;
+        var self = this;
+        var check = function () {
+            count++;
+            if (count == 4) {
+                callback.call(self);
+            }
+        };
+        var loader = new egret.URLLoader();
+        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
+            var loader = e.currentTarget;
+            this._mcTexture = loader.data;
+            check();
+        }, this);
+        loader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;
+        var request = new egret.URLRequest("resource/assets/car/car.png");
+        loader.load(request);
+        var loader = new egret.URLLoader();
+        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
+            var loader = e.currentTarget;
+            this._mcTexture = loader.data;
+            check();
+        }, this);
+        loader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;
+        var request = new egret.URLRequest("resource/assets/loadingBar1.png");
+        loader.load(request);
+        var loader = new egret.URLLoader();
+        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
+            var loader = e.currentTarget;
+            this._mcTexture = loader.data;
+            check();
+        }, this);
+        loader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;
+        var request = new egret.URLRequest("resource/assets/loadingBar2.png");
+        loader.load(request);
+        var loader = new egret.URLLoader();
+        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
+            var loader = e.currentTarget;
+            this._mcData = JSON.parse(loader.data);
+            check();
+        }, this);
+        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
+        var request = new egret.URLRequest("resource/assets/car/car.json");
+        loader.load(request);
+    };
+    p.initLoading = function () {
         this.loadingView = new LoadingUI();
         this.stage.addChild(this.loadingView);
+        var sound = this._sound = new egret.Sound();
+        //sound 加载完成监听
+        sound.addEventListener(egret.Event.COMPLETE, function (e) {
+            this.initSound();
+        }, this);
+        sound.load("resource/assets/bg.mp3");
         //初始化Resource资源加载库
         //initiate Resource loading library
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         RES.loadConfig("resource/default.res.json", "resource/");
+    };
+    p.initSound = function () {
+        this._channel = this._sound.play(0);
     };
     /**
      * 配置文件加载完成,开始预加载preload资源组。
@@ -81,43 +141,28 @@ var Main = (function (_super) {
     p.createGameScene = function () {
         var scene = new MainGame();
         this.addChild(scene);
-        // var sky:egret.Bitmap = this.createBitmapByName("bg_jpg");
-        // this.addChild(sky);
-        // var stageW:number = this.stage.stageWidth;
-        // var stageH:number = this.stage.stageHeight;
-        // sky.width = stageW;
-        // sky.height = stageH;
-        // this._shape = new egret.Shape();
-        // this.addChild(this._shape);
-        // this._shape.graphics.lineStyle(2, 0x000000);
-        // this.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchStart, this);
-        // this.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchMove, this);
-        // this.stage.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this);
+        this._audio = new MyButton('page1_3_png', 'page1_3_png');
+        this.addChild(this._audio);
+        this._audio.x = Const.SWIDTH - this._audio.width / 2 - 20;
+        this._audio.y = 50;
+        this._audio.anchorOffsetX = this._audio.width / 2;
+        this._audio.anchorOffsetY = this._audio.height / 2;
+        this._audio.setClick(this.audioCallback.bind(this));
+        egret.Tween.get(this._audio, { loop: true })
+            .to({ rotation: 360 }, 800);
     };
-    p.touchStart = function (e) {
-        this._touchStatus = true;
-        var x = e.stageX;
-        var y = e.stageY;
-        this._shape.graphics.moveTo(x, y);
-        this._shape.graphics.lineTo(x + 1, y);
-    };
-    p.touchMove = function (e) {
-        if (this._touchStatus) {
-            var x = e.stageX;
-            var y = e.stageY;
-            this.movePoint(x, y);
+    p.audioCallback = function () {
+        if (this._audioStatus) {
+            this._audioStatus = false;
+            egret.Tween.pauseTweens(this._audio);
+            this._channel.stop();
+            this._channel = null;
         }
-    };
-    p.touchEnd = function (e) {
-        this._touchStatus = false;
-        this._x = [];
-        this._y = [];
-    };
-    p.movePoint = function (x, y) {
-        this._x.push(x);
-        this._y.push(y);
-        var shape = this._shape;
-        shape.graphics.lineTo(x, y);
+        else {
+            this._audioStatus = true;
+            egret.Tween.resumeTweens(this._audio);
+            this._channel = this._sound.play(0);
+        }
     };
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
