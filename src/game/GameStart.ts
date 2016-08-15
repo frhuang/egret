@@ -23,7 +23,7 @@ class GameStart extends egret.Sprite{
         var mc:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData( "car" ) );
         this.addChild(mc);  
         mc.x = width - mc.width / 2;
-        mc.y = height / 2;
+        mc.y = height / 2 - mc.height / 4;
         mc.frameRate = 12;
         mc.gotoAndPlay(0, -1); 
 

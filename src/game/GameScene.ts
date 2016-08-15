@@ -83,8 +83,10 @@ class GameScene extends egret.DisplayObjectContainer{
 
         var drawArea = ResourceUtils.createBitmapByName('page2_4_png');
         this.addChild(drawArea);
-        drawArea.x = width - drawArea.width / 2;
-        drawArea.y = height - drawArea.height / 2 + 75;
+        drawArea.x = width;
+        drawArea.y = height + 75;
+        drawArea.anchorOffsetX = drawArea.width / 2;
+        drawArea.anchorOffsetY = drawArea.height /2;
         drawArea.touchEnabled = true;
         this._drawArea = drawArea;
 
@@ -95,6 +97,10 @@ class GameScene extends egret.DisplayObjectContainer{
         this.addChildAt(this._car, 999);
         this._car.width = Const.SWIDTH;
         this._car.height = Const.SHEIGHT;
+        this._car.anchorOffsetX = width;
+        this._car.anchorOffsetY = height;
+        this._car.x = width;
+        this._car.y = height;
         
 
         var confirm_btn:MyButton = new MyButton("btn2_png", "btn2_png");
@@ -129,6 +135,12 @@ class GameScene extends egret.DisplayObjectContainer{
         this._shape = new egret.Shape();
         this._car.addChild(this._shape);
         this._shape.graphics.lineStyle(5, 0x777574);
+        this._shape.anchorOffsetX = drawArea.width /2;
+        this._shape.anchorOffsetY = drawArea.height / 2;
+        this._shape.width = drawArea.width;
+        this._shape.height = drawArea.height;
+        this._shape.x = drawArea.width / 2;
+        this._shape.y = drawArea.height / 2;
         
 
         drawArea.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.drawStart, this);
@@ -163,6 +175,7 @@ class GameScene extends egret.DisplayObjectContainer{
         this.stage.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this);
 
     }
+    //确认按钮
     private confirmClick():void{
         if(this._index === 2) {
             if(this._isTouch1){
@@ -181,6 +194,7 @@ class GameScene extends egret.DisplayObjectContainer{
             }
         }
     }
+    //重画按钮
     private redrawClick():void{
         if(this._index === 2){
             this._shape.graphics.clear();
@@ -192,14 +206,15 @@ class GameScene extends egret.DisplayObjectContainer{
             this._lineShape.graphics.lineStyle(2, 0x000000);
         }
     }
+    //画车开始
     private drawStart(e:egret.TouchEvent) {
         this._touchStatus = true;
         var x = e.stageX;
         var y = e.stageY;
         this._shape.graphics.moveTo(x, y);
         this._shape.graphics.lineTo(x+1, y);
-        
     }
+    //画车移动
     private drawMove(e:egret.TouchEvent) {
         if(this._touchStatus1 || this._touchStatus2) return;
         if(this._touchStatus){
@@ -209,6 +224,7 @@ class GameScene extends egret.DisplayObjectContainer{
             this.movePoint(x, y, this._shape);
         }
     }
+    //画车结束
     private drawEnd(e:egret.TouchEvent) {
         this._all_X_Y.push(this._x);
         this._all_Y_X.push(this._y);
@@ -216,12 +232,14 @@ class GameScene extends egret.DisplayObjectContainer{
         this._x = [];
         this._y = [];
     }
+    //画出点数
     private movePoint(x, y, target:egret.Shape):void{
         var shape:egret.Shape = target;
         shape.graphics.lineTo(x, y);
     }
     //按下左边轮胎
     private leftShoeDown(e:egret.TouchEvent){
+        if(this._touchStatus) return;
         this._touchStatus1 = true;
         this._distance.x = e.stageX - this._leftShoe.x;
     } 
@@ -231,6 +249,7 @@ class GameScene extends egret.DisplayObjectContainer{
     }
     //按下右边轮胎
     private rightShoeDown(e:egret.TouchEvent) {
+        if(this._touchStatus) return;
         this._touchStatus2 = true;
         this._distance.x = e.stageX - this._rightShoe.x;
     }
@@ -244,8 +263,6 @@ class GameScene extends egret.DisplayObjectContainer{
         var y = e.stageY;
         if(this._index === 3){
             this._touchStatus3 = true;
-            this._touchStatus1 = false;
-            this._touchStatus2 = false;
             this._lineShape.graphics.moveTo(x, y);
             this._lineShape.graphics.lineTo(x+1, y);
         }else if(this._index === 5) {
@@ -314,33 +331,27 @@ class GameScene extends egret.DisplayObjectContainer{
         var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
         var mc:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData( "dust" ) );
         this._car.addChild(mc);  
-        mc.x = this._winWidth - 400;
+        mc.x = this._winWidth - 390;
         mc.y = this._winHeight / 2 + 420;
         mc.scaleX = 2;
         mc.scaleY = 2;
-        mc.frameRate = 15;
+        mc.frameRate = 12;
         mc.gotoAndPlay(0, -1); 
         this._dust = mc;
-
-        var x = Const.SWIDTH * 0.15;
-        var y = Const.SHEIGHT * 0.2 - 5;
-        this._car.x = x;
-        this._car.y = y;
-        this._car.scaleX = 0.7;
-        this._car.scaleY = 0.7;
+        this._shape.skewX = 0.5;
         egret.Tween.get(this._car)
-        .wait(100)
-        .call(this.carMove, this);
-        this._round.gotoAndPlay(0, -1);
-        
+            .to({scaleX: 0.7, scaleY: 0.7, y: this._winHeight + 60}, 1000)
+            .wait(100)
+            .call(this.carMove, this);
     }
     private carMove():void{
+        this._round.gotoAndPlay(0, -1);
         egret.Tween.get(this._leftShoe, {loop: true}).to({rotation:360}, 1500);
         egret.Tween.get(this._rightShoe, {loop: true}).to({rotation: 360}, 1500);
-        egret.Tween.get(this._car).wait(1500).call(this.fastMove, this);
+        // egret.Tween.get(this._car).wait(1500).call(this.fastMove, this);
         egret.Tween.get(this._shape, {loop: true})
-            .to({y: this._shape.y - 4}, 200)
-            .to({y: this._shape.y + 4}, 200);
+            .to({y: this._shape.y - 4, skewX: 0.5}, 200)
+            .to({y: this._shape.y + 4, skewX: 1}, 200);
     }
     private fastMove():void{
         egret.Tween.get(this._car)
@@ -367,12 +378,8 @@ class GameScene extends egret.DisplayObjectContainer{
             .to({x: x}, 1500, egret.Ease.sineOut);
     }
     private page3Start():void{
-        this._dust.visible = false;
-        
         this._round.stop();
-        egret.Tween.pauseTweens(this._shape);
-        egret.Tween.pauseTweens(this._leftShoe);
-        egret.Tween.pauseTweens(this._rightShoe);
+        this.carStop();
         this._lineShape = new egret.Shape();
         this.addChild(this._lineShape);
         this._lineShape.graphics.lineStyle(2, 0x000000);
@@ -390,7 +397,7 @@ class GameScene extends egret.DisplayObjectContainer{
         mc.y = this._winHeight - 133;
         mc.frameRate = 10;
         mc.gotoAndPlay(0); 
-        egret.Tween.get(this._car).wait(900).call(this.addKaAnimate, this);
+        egret.Tween.get(this.stage).wait(900).call(this.addKaAnimate, this);
         this._longMovie1 = mc;
         this._longMovie1.addEventListener(egret.Event.COMPLETE, this.longAnimateEnd, this);
     }
@@ -474,9 +481,8 @@ class GameScene extends egret.DisplayObjectContainer{
             .call(this.page4Start, this);
     }
     private page4Start():void{
-        this._dust.visible = false;
+        this.carStop();
         this._index = 4;
-        this.pauseTween();
         this._headTitle.texture = RES.getRes("page4_1_png");
         this.titleShow();
         this.btnShow();
@@ -490,7 +496,7 @@ class GameScene extends egret.DisplayObjectContainer{
         this._navigation.addEventListener(egret.TouchEvent.TOUCH_END, this.navUp, this);
         this._navigation.touchEnabled = true;
         this._navigation.visible = false;
-        egret.Tween.get(this._navigation, {loop: true})
+        egret.Tween.get(this._navigation)
             .wait(1000).call(this.showNav, this);
     }
     private showNav():void{
@@ -523,7 +529,7 @@ class GameScene extends egret.DisplayObjectContainer{
             this._navigation.anchorOffsetX = this._navigation.width / 2;
             this._navigation.anchorOffsetY = this._navigation.height / 2;
             this._navigation.x = xx;
-            this._navigation.y = this._rightShoe.y - 200;
+            this._navigation.y = this._rightShoe.y - 170;
             egret.Tween.get(this._navigation, {loop: true})
                 .to({scaleX: 1.6, scaleY: 1.3}, 300)
                 .to({scaleX: 1.428, scaleY: 1.428}, 300).wait(100);
@@ -578,8 +584,7 @@ class GameScene extends egret.DisplayObjectContainer{
             .to({rotation: 360}, 2000);
     }
     private page5Start():void{
-        this._dust.visible = false;
-        this.pauseTween();
+        this.carStop();
         this._index = 5;
         this._headTitle.texture = RES.getRes("page5_1_png");
         this.titleShow();
@@ -622,12 +627,7 @@ class GameScene extends egret.DisplayObjectContainer{
             egret.Tween.resumeTweens(this._rightShoe);
         }, this)
         .to({x: Const.SWIDTH - 100}, 1500, egret.Ease.sineIn)
-        .call(() => {
-            this._dust.visible = false;
-            egret.Tween.resumeTweens(this._shape);
-            egret.Tween.resumeTweens(this._leftShoe);
-            egret.Tween.resumeTweens(this._rightShoe);
-        })
+        .call(this.carStop, this)
         .wait(1000)
         .call(this.page6, this);
     }
@@ -667,7 +667,7 @@ class GameScene extends egret.DisplayObjectContainer{
         this._input = input;
         input.width = 180;
         input.height = 100;
-        input.size = 22;
+        input.size = 30;
         input.textColor = 0x292929;
         input.verticalAlign = egret.VerticalAlign.MIDDLE;
         input.type = egret.TextFieldType.INPUT;
@@ -689,7 +689,7 @@ class GameScene extends egret.DisplayObjectContainer{
             .call(this.page6Show, this);
     }
     private page6Show():void{
-        this.pauseTween();
+        this.carStop();
         this._page6Title.visible = true;
         this._headTitle.texture = RES.getRes("page6_1_png");
         this.titleShow();
@@ -708,10 +708,15 @@ class GameScene extends egret.DisplayObjectContainer{
         var width = Const.SWIDTH;
         var height = Const.SHEIGHT;
         var w = width / 2;
-        this._car.x = 100;
-        console.log(this._car.y);
-
-        this._car.y = this._car.y + 135;
+        this._car.x = Const.SWIDTH * 0.15;
+        this.removeChild(this._round);
+        this._car.y = Const.SHEIGHT * 0.2;
+        var round = ResourceUtils.createBitmapByName('page2_7_png');
+        this._car.addChild(round);
+        round.scaleX = 1.4;
+        round.scaleY = 1.4;
+        round.x = width / 2 - round.width / 2 - 130;
+        round.y = height / 2 + 180;
 
         egret.Tween.resumeTweens(this._shape);
         egret.Tween.resumeTweens(this._leftShoe);
@@ -724,9 +729,6 @@ class GameScene extends egret.DisplayObjectContainer{
         egret.Tween.get(gold)
             .to({y: -10}, 500, egret.Ease.backOut)
             .call(this.page7Title, this);
-
-        
-        this._round.y = Const.SHEIGHT - 360;
     }
     private page7Title():void{
         var w = this._winWidth;
@@ -734,13 +736,13 @@ class GameScene extends egret.DisplayObjectContainer{
         var title2:egret.Bitmap = ResourceUtils.createBitmapByName('page7_6_png');
         this.addChild(title2);
         title2.x = w - title2.width / 2;
-        title2.y = 370;
+        title2.y = 350;
 
         var label:egret.TextField = new egret.TextField();
         this.addChild(label);
         label.width = 120;
-        label.x = Const.SWIDTH - 350;
-        label.y = 530;
+        label.x = Const.SWIDTH - 340;
+        label.y = 510;
         label.textColor = 0xf3382f;
         label.size = 20;
         label.verticalAlign = egret.VerticalAlign.MIDDLE;
@@ -749,7 +751,7 @@ class GameScene extends egret.DisplayObjectContainer{
         var title3:egret.Bitmap = ResourceUtils.createBitmapByName('page7_4_png');
         this.addChild(title3);
         title3.x = w;
-        title3.y = title2.height + 440;
+        title3.y = title2.height + 400;
         title3.scaleX = 0.01;
         title3.scaleY = 0.01;
         title3.anchorOffsetX = title3.width / 2;
@@ -809,16 +811,29 @@ class GameScene extends egret.DisplayObjectContainer{
         this._shareShape.alpha = .6;
         this._share.visible = true;
     }
+    private carStop():void{
+        this._dust.visible = false;
+        egret.Tween.pauseTweens(this._leftShoe);
+        egret.Tween.pauseTweens(this._rightShoe);
+        egret.Tween.pauseTweens(this._shape);
+    }
+    private carStartMove():void{
+        this._dust.visible = true;
+        egret.Tween.get(this._leftShoe, {loop: true}).to({rotation:360}, 1500);
+        egret.Tween.get(this._rightShoe, {loop: true}).to({rotation: 360}, 1500);
+        egret.Tween.resumeTweens(this._shape);
+    }
+    private carStand():void{
+        
+    }
     private carAppear():void{
         this._car.x  = - Const.SWIDTH*0.5;
         this._car.y = Const.SHEIGHT *0.2 -5;
         this._car.rotation = 0;
+        this._car.scaleX = 0.7;
+        this._car.scaleY = 0.7;
     }
-    private pauseTween():void{
-        egret.Tween.pauseTweens(this._shape);
-        egret.Tween.pauseTweens(this._leftShoe);
-        egret.Tween.pauseTweens(this._rightShoe);
-    }
+   
     private titleHide() {
         this._head.visible = false;
         this._headTitle.visible = false;

@@ -34,8 +34,8 @@ class LoadingUI extends egret.Sprite {
     private carJsonUrl = "resource/assets/car/car.json";
     private _loadingBg:egret.Bitmap;
     private _loadingBar:egret.Bitmap;
-    private _data:any;
-    private _texture:any;
+    private _mcData:any;
+    private _mcTexture:egret.Texture;
     private _count:number = 0;
     public constructor() {
         super();
@@ -46,7 +46,9 @@ class LoadingUI extends egret.Sprite {
 
     private createView():void {
         this._count = 0;
-          var urlLoader:egret.URLLoader = new egret.URLLoader();
+        var width = Const.SWIDTH;
+        var height = Const.SHEIGHT;
+        var urlLoader:egret.URLLoader = new egret.URLLoader();
         urlLoader.addEventListener(egret.Event.COMPLETE,this.onComplete,this);
         urlLoader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;
         urlLoader.load(new egret.URLRequest(this.bar1Url));
@@ -56,22 +58,13 @@ class LoadingUI extends egret.Sprite {
         urlLoader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;
         urlLoader.load(new egret.URLRequest(this.bar2Url));
 
-
-        // var urlLoader:egret.URLLoader = new egret.URLLoader();
-        // urlLoader.addEventListener(egret.Event.COMPLETE,this.onComplete,this);
-        // urlLoader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;
-        // urlLoader.load(new egret.URLRequest(this.carPngUrl));
-
-        // var urlLoader:egret.URLLoader = new egret.URLLoader();
-        // urlLoader.addEventListener(egret.Event.COMPLETE,this.onComplete,this);
-        // urlLoader.dataFormat = egret.URLLoaderDataFormat.TEXT;
-        // urlLoader.load(new egret.URLRequest(this.carJsonUrl));
+        this.load(this.initMovieClip);
 
         this.textField = new egret.TextField();
         this.addChild(this.textField);
-        this.textField.y = Const.SHEIGHT / 2;
+        this.textField.y = height / 2;
         this.textField.textColor = 0xf3382f;
-        this.textField.width = 750;
+        this.textField.width = width;
         this.textField.height = 100;
         this.textField.textAlign = "center";
 
@@ -79,16 +72,16 @@ class LoadingUI extends egret.Sprite {
         this._loadingBar = new egret.Bitmap();
         this.addChild(this._loadingBg);
         this.addChild(this._loadingBar);
-        // this._data = RES.getRes(this.carJsonUrl);
-        // this._texture = RES.getRes(this.carPngUrl);
 
-        // var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( this._data, this._texture );
-        // var mc:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData("car") );
-        // this.addChild(mc);  
-        // mc.x = Const.SWIDTH - mc.width / 2;
-        // mc.y = Const.SHEIGHT / 2;
-        // mc.frameRate = 10;
-        // mc.gotoAndPlay(0, -1); 
+         var data = RES.getRes("car_json");//JSON  
+        var txtr:egret.Texture = RES.getRes("car_png");//Texture  
+        var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
+        var mc:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData( "car" ) );
+        this.addChild(mc);  
+        mc.x = width / 2 - mc.width / 2;
+        mc.y = width / 2 - mc.height / 4;
+        mc.frameRate = 12;
+        mc.gotoAndPlay(0, -1); 
     }
     private onComplete(e:egret.Event) {
         var urlLoader:egret.URLLoader = <egret.URLLoader>e.target;
@@ -103,32 +96,6 @@ class LoadingUI extends egret.Sprite {
             this._loadingBar.x = Const.SWIDTH / 2 - this._loadingBar.width / 2;
             this._loadingBar.y = Const.SHEIGHT / 2  + 50;
             this._loadingBar.scaleX = 0.01;
-        }else if(urlLoader._request.url == this.carPngUrl) {
-            this._count ++;
-            this._texture = texture;
-            this.isInitMc();
-        }else if(urlLoader._request.url == this.carJsonUrl) {
-            // this._count ++;
-            // this._data = texture;
-            // this.isInitMc();
-            var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( this._data, this._texture );
-            var mc:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData("car") );
-            this.addChild(mc);  
-            mc.x = Const.SWIDTH - mc.width / 2;
-            mc.y = Const.SHEIGHT / 2;
-            mc.frameRate = 10;
-            mc.gotoAndPlay(0, -1); 
-        }
-    }
-    private isInitMc() {
-        if(this._count === 2 && this._texture && this._data) {
-            var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( this._data, this._texture );
-            var mc:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData("car") );
-            this.addChild(mc);  
-            mc.x = Const.SWIDTH - mc.width / 2;
-            mc.y = Const.SHEIGHT / 2;
-            mc.frameRate = 10;
-            mc.gotoAndPlay(0, -1); 
         }
     }
     public setProgress(current:number, total:number):void {
@@ -136,5 +103,50 @@ class LoadingUI extends egret.Sprite {
         var dt = current / total;
         this._loadingBar.scaleX = dt;
         this.textField.text = `${radio}%`;
+    }
+    private initMovieClip():void {
+        /*** 本示例关键代码段开始 ***/
+        var mcDataFactory = new egret.MovieClipDataFactory(this._mcData, this._mcTexture);
+        var role:egret.MovieClip = new egret.MovieClip(mcDataFactory.generateMovieClipData("car"));
+        this.addChild(role);  
+        role.x = Const.SWIDTH / 2 - role.width / 2;
+        role.y = Const.SHEIGHT / 2 - role.height / 2 - 200;
+        role.frameRate = 12;
+        role.gotoAndPlay(0, -1); 
+    }
+    protected load(callback:Function):void {
+        var count:number = 0;
+        var self = this;
+        
+        var check = function () {
+            count++;
+            if (count == 2) {
+                callback.call(self);
+            }
+        }
+        
+        var loader = new egret.URLLoader();
+        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
+            var loader = e.currentTarget;
+
+            this._mcTexture = loader.data;
+            
+            check();
+        }, this);
+        loader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;
+        var request = new egret.URLRequest("resource/assets/car/car.png");
+        loader.load(request);
+        
+        var loader = new egret.URLLoader();
+        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
+            var loader = e.currentTarget;
+
+            this._mcData = JSON.parse(loader.data);
+            
+            check();
+        }, this);
+        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
+        var request = new egret.URLRequest("resource/assets/car/car.json");
+        loader.load(request);
     }
 }

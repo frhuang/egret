@@ -3,10 +3,6 @@ var Main = (function (_super) {
     function Main() {
         _super.call(this);
         this._audioStatus = true;
-        this._touchStatus = false;
-        this._distance = new egret.Point();
-        this._x = [];
-        this._y = [];
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
     var d = __define,c=Main,p=c.prototype;
@@ -15,8 +11,18 @@ var Main = (function (_super) {
         //Config to load process interface
         Const.SWIDTH = this.stage.stageWidth;
         Const.SHEIGHT = this.stage.stageHeight;
-        // this.loadLoading(this.initLoading);
-        this.initLoading();
+        this.loadingView = new LoadingUI();
+        this.stage.addChild(this.loadingView);
+        var sound = this._sound = new egret.Sound();
+        //sound 加载完成监听
+        sound.addEventListener(egret.Event.COMPLETE, function (e) {
+            this.initSound();
+        }, this);
+        sound.load("resource/assets/bg.mp3");
+        //初始化Resource资源加载库
+        //initiate Resource loading library
+        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
+        RES.loadConfig("resource/default.res.json", "resource/");
     };
     p.initLoading = function () {
         this.loadingView = new LoadingUI();

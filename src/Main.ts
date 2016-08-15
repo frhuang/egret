@@ -21,8 +21,19 @@ class Main extends egret.DisplayObjectContainer {
         //Config to load process interface
         Const.SWIDTH = this.stage.stageWidth;
         Const.SHEIGHT = this.stage.stageHeight;
-        // this.loadLoading(this.initLoading);
-        this.initLoading();
+
+        this.loadingView = new LoadingUI();
+        this.stage.addChild(this.loadingView);
+        var sound: egret.Sound = this._sound = new egret.Sound();
+        //sound 加载完成监听
+        sound.addEventListener(egret.Event.COMPLETE, function (e: egret.Event) {
+            this.initSound();
+        }, this);
+        sound.load("resource/assets/bg.mp3");
+        //初始化Resource资源加载库
+        //initiate Resource loading library
+        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
+        RES.loadConfig("resource/default.res.json", "resource/");
         
     }
     private initLoading() {
@@ -100,12 +111,6 @@ class Main extends egret.DisplayObjectContainer {
             this.loadingView.setProgress(event.itemsLoaded, event.itemsTotal);
         }
     }
-
-    private _shape:egret.Shape; 
-    private _touchStatus:boolean = false;  
-    private _distance:egret.Point = new egret.Point();
-    private _x:Array<number> = [];
-    private _y:Array<number> = [];
     /**
      * 创建游戏场景
      * Create a game scene
