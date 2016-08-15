@@ -41,7 +41,7 @@ var GameScene = (function (_super) {
         this._du = du;
         var mask = new egret.Shape();
         mask.graphics.beginFill(0x000000);
-        mask.graphics.drawRect(0, 100, width * 2, 240);
+        mask.graphics.drawRect(0, 120, width * 2, 260);
         mask.graphics.endFill();
         this.addChild(mask);
         this._labelScroll = new egret.Sprite();
@@ -144,17 +144,24 @@ var GameScene = (function (_super) {
         }
         else {
             label.y = this._labelPosY;
-            this._labelNextY = this._labelNextY + label.height + 24;
+            this._labelNextY = this._labelNextY + label.height + 20;
             this._labelPosY = this._labelPosY + label.height + 20;
         }
         label.alpha = 0;
         egret.Tween.get(label).to({ alpha: 1 }, 1000);
-        console.log(y);
-        index++;
         if (index != 0) {
             egret.Tween.get(this._labelScroll)
                 .wait(100)
                 .to({ y: -y }, 1000);
+        }
+        if (index === 9) {
+            var down = ResourceUtils.createBitmapByName('page6_4_png');
+            this._labelScroll.addChild(down);
+            down.x = Const.SWIDTH - 135;
+            down.y = label.y + 20;
+            egret.Tween.get(down, { loop: true })
+                .to({ y: down.y + 10 }, 400)
+                .to({ y: down.y - 10 }, 400);
         }
     };
     //确认按钮
@@ -595,6 +602,7 @@ var GameScene = (function (_super) {
     p.page5 = function () {
         this.removeChild(this._threeRound);
         this._car.x = -100;
+        this._round.y = this._round.y + 50;
         egret.Tween.get(this._navigation)
             .to({ rotation: -15 }, 500)
             .wait(1500)
@@ -602,7 +610,7 @@ var GameScene = (function (_super) {
             .to({ rotation: 8 }, 50)
             .to({ rotation: 0 }, 50);
         egret.Tween.get(this._car)
-            .to({ rotation: 0, x: 100, y: Const.SHEIGHT / 2 + 60 }, 2000, egret.Ease.sineOut)
+            .to({ rotation: 0, scaleX: 0.7, scaleY: 0.7, x: 100, y: Const.SHEIGHT / 2 + 60 }, 2000, egret.Ease.sineOut)
             .to({ x: 130 }, 500, egret.Ease.sineOut)
             .to({ x: 150 }, 500, egret.Ease.sineOut)
             .to({ x: 170 }, 500, egret.Ease.sineOut)
@@ -646,41 +654,43 @@ var GameScene = (function (_super) {
         this.addChild(this._gas);
         this._gas.anchorOffsetX = this._gas.width / 2;
         this._gas.anchorOffsetY = this._gas.height / 2;
-        this._gas.scaleX = 0.5;
-        this._gas.scaleY = 0.5;
+        this._gas.scaleX = 0.6;
+        this._gas.scaleY = 0.6;
         this._gas.x = Const.SWIDTH - 150;
-        this._gas.y = Const.SHEIGHT / 2 - this._gas.height / 2 - 50;
+        this._gas.y = Const.SHEIGHT / 2 - this._gas.height / 2;
         this._gas.alpha = 0;
         egret.Tween.get(this._gas)
-            .to({ alpha: 1 }, 800);
+            .wait(200)
+            .to({ alpha: 1, scaleX: 0.5, scaleY: 0.5 }, 500);
         egret.Tween.get(this._car)
-            .wait(1500)
-            .to({ scaleX: 0.5, scaleY: 0.5, y: this._car.y + 130 }, 500)
+            .wait(200)
+            .to({ scaleX: 0.5, scaleY: 0.5, y: this._car.y + 180 }, 500)
+            .wait(1000)
+            .to({ scaleX: 0.3, scaleY: 0.3, x: Const.SWIDTH - 200, y: Const.SHEIGHT / 2 - 100 }, 2000)
             .wait(500)
-            .to({ scaleX: 0.3, scaleY: 0.3, x: Const.SWIDTH - 200, y: Const.SHEIGHT / 2 - 200 }, 1000)
             .call(this.scaleGas, this);
         egret.Tween.get(this._round)
+            .wait(200)
             .to({ y: this._round.y + 130 }, 500);
     };
     p.scaleGas = function () {
         egret.Tween.get(this._car)
-            .to({ scaleX: 0.7, scale: 0.7, x: 250, y: Const.SHEIGHT / 2 + 60 }, 1000)
+            .to({ scaleX: 0.7, scaleY: 0.7, x: 250, y: this._winHeight + 60 }, 500)
             .wait(2000)
             .to({ x: Const.SWIDTH + 200 }, 1000, egret.Ease.sineIn)
             .call(this.page6, this);
         egret.Tween.get(this._gas)
-            .to({ scaleX: 1, scaleY: 1, x: Const.SWIDTH, y: Const.SHEIGHT / 2 - 50 }, 1000);
+            .to({ scaleX: 1, scaleY: 1, x: Const.SWIDTH - 300, y: Const.SHEIGHT / 2 + 40 }, 500);
         egret.Tween.get(this._round)
-            .to({ y: this._round.y - 130 }, 1000);
+            .to({ y: this._round.y - 130 }, 500);
     };
     p.page6 = function () {
         this.removeChild(this._gas);
         this.removeChild(this._lineShape);
-        this._car.x = -Const.SWIDTH * 0.5;
-        this._car.y = Const.SHEIGHT * 0.2 - 5;
+        this._car.x = 0;
         this._car.rotation = 0;
         egret.Tween.get(this._car)
-            .to({ x: -this._carAppearPos.x + 50 }, 1500, egret.Ease.sineOut);
+            .to({ x: 200 }, 1500, egret.Ease.sineOut);
         this.page6Start();
         egret.Tween.resumeTweens(this._shape);
         egret.Tween.resumeTweens(this._leftShoe);
@@ -723,42 +733,48 @@ var GameScene = (function (_super) {
             .to({ x: Const.SWIDTH - this._milestone.width - 30 }, 1500, egret.Ease.sineOut)
             .call(this.page6Show, this);
         egret.Tween.get(this._input)
-            .to({ x: Const.SWIDTH - this._milestone.width + 90 }, 1500, egret.Ease.sineOut)
-            .call(this.page6Show, this);
+            .to({ x: Const.SWIDTH - this._milestone.width + 90 }, 1500, egret.Ease.sineOut);
     };
     p.page6Show = function () {
         this.carStop();
         this._page6Title.visible = true;
-        this.btnShow();
+        this._labelScroll.visible = true;
+        egret.Tween.get(this._labelScroll)
+            .wait(100)
+            .call(this.addLabel, this, ["label8_png", 8])
+            .wait(1200)
+            .call(this.addLabel, this, ["label9_png", 9])
+            .wait(1000)
+            .call(this.btnShow, this);
     };
     p.page6Hide = function () {
         this.btnHide();
         this.removeChild(this._milestone);
+        this._labelScroll.visible = false;
         this._input.visible = false;
         this._navigation.visible = false;
     };
     p.page7 = function () {
         this.removeChild(this._du);
-        this._dust.visible = true;
-        this._index = 7;
-        var width = Const.SWIDTH;
-        var height = Const.SHEIGHT;
-        var w = width / 2;
-        this._car.x = Const.SWIDTH * 0.15;
         this.removeChild(this._round);
-        this._car.y = Const.SHEIGHT * 0.2;
+        this._index = 7;
+        egret.Tween.resumeTweens(this._shape);
+        egret.Tween.resumeTweens(this._leftShoe);
+        egret.Tween.resumeTweens(this._rightShoe);
+        egret.Tween.get(this._car)
+            .to({ scaleX: 0.6, scaleY: 0.6, x: Const.SWIDTH / 2, y: Const.SHEIGHT / 2 + 100 }, 1000)
+            .call(this.addGold, this);
+    };
+    p.addGold = function () {
         var round = ResourceUtils.createBitmapByName('page2_7_png');
         this._car.addChild(round);
         round.scaleX = 1.4;
         round.scaleY = 1.4;
-        round.x = width / 2 - round.width / 2 - 130;
-        round.y = height / 2 + 180;
-        egret.Tween.resumeTweens(this._shape);
-        egret.Tween.resumeTweens(this._leftShoe);
-        egret.Tween.resumeTweens(this._rightShoe);
+        round.x = Const.SWIDTH / 2 - round.width / 2 - 130;
+        round.y = Const.SHEIGHT / 2 + 180;
         var gold = ResourceUtils.createBitmapByName('page7_1_png');
         this.addChild(gold);
-        gold.x = w - gold.width / 2;
+        gold.x = Const.SWIDTH / 2 - gold.width / 2;
         gold.y = -gold.height;
         egret.Tween.get(gold)
             .to({ y: -10 }, 500, egret.Ease.backOut)
