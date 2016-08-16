@@ -42,6 +42,11 @@ var LoadingUI = (function (_super) {
         this._count = 0;
         var width = Const.SWIDTH;
         var height = Const.SHEIGHT;
+        var ss = new egret.Shape();
+        ss.graphics.beginFill(0xe9e3d9);
+        ss.graphics.drawRect(0, 0, width, height);
+        ss.graphics.endFill();
+        this.addChild(ss);
         var urlLoader = new egret.URLLoader();
         urlLoader.addEventListener(egret.Event.COMPLETE, this.onComplete, this);
         urlLoader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;

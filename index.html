@@ -38,11 +38,12 @@
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
-	<script egret="game" src="bin-debug/LoadingUI.js"></script>
-	<script egret="game" src="bin-debug/Main.js"></script>
+	<script egret="game" src="bin-debug/game/Background.js"></script>
 	<script egret="game" src="bin-debug/game/GameScene.js"></script>
 	<script egret="game" src="bin-debug/game/GameStart.js"></script>
 	<script egret="game" src="bin-debug/game/MainGame.js"></script>
+	<script egret="game" src="bin-debug/LoadingUI.js"></script>
+	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/utils/Consts.js"></script>
 	<script egret="game" src="bin-debug/utils/MyButton.js"></script>
 	<script egret="game" src="bin-debug/utils/ResourceUtils.js"></script>
@@ -62,8 +63,8 @@
          data-show-fps="false" data-show-log="false"
          data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
-    <!--<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
-    <!--<script src="//cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>-->
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="zepto.min.js"></script>
     <script>
         /**
          * {
@@ -73,53 +74,57 @@
          **/
         egret.runEgret({renderMode:"webgl", audioType:0});
 
-        // wxShare('金牌“老司机”如何炼成','金牌“老司机”如何炼成');
-        // function wxShare(shareTitle,shareDesc,link){
-        // if(!link){ var link = location.href; }
-        // var uri = window.location.href.split("#")[0];
-        // $.post("http://public.oyoozo.com/wxapi.php", {
-        //     uri: uri
-        // }, function (data) {
-        //     data = eval("(" + data + ")");
-        //     var apilist = [
-        //         'onMenuShareTimeline',
-        //         'onMenuShareAppMessage'
-        //     ];
-        //     wx.config({
-        //         debug: false,
-        //         appId: data.appid,
-        //         timestamp: data.timestamp,
-        //         nonceStr: data.noncestr,
-        //         signature: data.signature,
-        //         jsApiList: apilist
-        //     });
+        function receiveAward(){
+            alert("领取成功");
+        }
 
-        //     wx.ready(function () {
-        //         // 分享给朋友事件绑定
-        //         wx.onMenuShareAppMessage({
-        //             title: shareTitle,
-        //             desc: shareDesc,
-        //             link: link,
-        //             imgUrl: './resource/share.jpg', //分享图标
-        //             success: function () { 
+        wxShare('金牌“老司机”如何炼成','攒里程，赢金牌，领取老司机奖励吧');
+        function wxShare(shareTitle,shareDesc,link){
+        if(!link){ var link = location.href; }
+        var uri = window.location.href.split("#")[0];
+        $.post("http://public.oyoozo.com/wxapi.php", {
+            uri: uri
+        }, function (data) {
+            data = eval("(" + data + ")");
+            var apilist = [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage'
+            ];
+            wx.config({
+                debug: false,
+                appId: data.appid,
+                timestamp: data.timestamp,
+                nonceStr: data.noncestr,
+                signature: data.signature,
+                jsApiList: apilist
+            });
 
-        //             }
-        //         });
+            wx.ready(function () {
+                // 分享给朋友事件绑定
+                wx.onMenuShareAppMessage({
+                    title: shareTitle,
+                    desc: shareDesc,
+                    link: link,
+                    imgUrl: './resource/share.jpg', //分享图标
+                    success: function () { 
 
-        //         // 分享到朋友圈
-        //         wx.onMenuShareTimeline({
-        //             title:shareTitle,
-        //             link: link,
-        //             imgUrl: './resource/share.jpg',//分享图标
-        //             success: function () { 
+                    }
+                });
 
-        //             }
-        //         });
-        //     })
-        // });
-        // }
+                // 分享到朋友圈
+                wx.onMenuShareTimeline({
+                    title:shareTitle,
+                    link: link,
+                    imgUrl: './resource/share.jpg',//分享图标
+                    success: function () { 
+
+                    }
+                });
+            })
+        });
+        }
     </script>
-    <!--<script type="text/javascript">
+    <script type="text/javascript">
         var _hmt = _hmt || [];
         (function() {
         var hm = document.createElement("script");
@@ -127,6 +132,6 @@
         var s = document.getElementsByTagName("script")[0]; 
         s.parentNode.insertBefore(hm, s);
         })();
-    </script>-->
+    </script>
 </body>
 </html>

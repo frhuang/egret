@@ -2,7 +2,6 @@ var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
         _super.call(this);
-        this._audioStatus = true;
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
     var d = __define,c=Main,p=c.prototype;
@@ -13,12 +12,6 @@ var Main = (function (_super) {
         Const.SHEIGHT = this.stage.stageHeight;
         this.loadingView = new LoadingUI();
         this.stage.addChild(this.loadingView);
-        var sound = this._sound = new egret.Sound();
-        //sound 加载完成监听
-        sound.addEventListener(egret.Event.COMPLETE, function (e) {
-            this.initSound();
-        }, this);
-        sound.load("resource/assets/bg.mp3");
         //初始化Resource资源加载库
         //initiate Resource loading library
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
@@ -27,19 +20,10 @@ var Main = (function (_super) {
     p.initLoading = function () {
         this.loadingView = new LoadingUI();
         this.stage.addChild(this.loadingView);
-        var sound = this._sound = new egret.Sound();
-        //sound 加载完成监听
-        sound.addEventListener(egret.Event.COMPLETE, function (e) {
-            this.initSound();
-        }, this);
-        sound.load("resource/assets/bg.mp3");
         //初始化Resource资源加载库
         //initiate Resource loading library
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         RES.loadConfig("resource/default.res.json", "resource/");
-    };
-    p.initSound = function () {
-        // this._channel = this._sound.play(0);
     };
     /**
      * 配置文件加载完成,开始预加载preload资源组。
@@ -101,28 +85,6 @@ var Main = (function (_super) {
     p.createGameScene = function () {
         var scene = new MainGame();
         this.addChild(scene);
-        this._audio = new MyButton('page1_3_png', 'page1_3_png');
-        this.addChild(this._audio);
-        this._audio.x = Const.SWIDTH - this._audio.width / 2 - 20;
-        this._audio.y = 50;
-        this._audio.anchorOffsetX = this._audio.width / 2;
-        this._audio.anchorOffsetY = this._audio.height / 2;
-        this._audio.setClick(this.audioCallback.bind(this));
-        egret.Tween.get(this._audio, { loop: true })
-            .to({ rotation: 360 }, 800);
-    };
-    p.audioCallback = function () {
-        if (this._audioStatus) {
-            this._audioStatus = false;
-            egret.Tween.pauseTweens(this._audio);
-            this._channel.stop();
-            this._channel = null;
-        }
-        else {
-            this._audioStatus = true;
-            egret.Tween.resumeTweens(this._audio);
-            this._channel = this._sound.play(0);
-        }
     };
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,btn1_png,btn2_png,btn3_png,page1_1_png,page1_2_png,page1_3_png,page1_4_png,page1_5_png,page2_1_png,page2_2_png,page2_3_png,page2_4_png,page2_5_png,page2_6_png,page2_7_png,page3_1_png,page3_2_png,page4_1_png,page4_2_png,page4_3_png,page5_1_png,page5_2_png,page5_3_png,page6_1_png,page6_2_png,page7_1_png,page7_2_png,page7_3_png,page7_4_png,page7_5_png,bg_jpg,round_json,round_png,car_json,car_png,page7_6_png,page7_7_png,long_png,long_json,ka_png,ka_json,page3_3_png,page3_4_png,longnext_png,longnext_json,kanext_png,kanext_json,dust_json,dust_png,share_jpg,bg_mp3,page6_3_png,loading_bar2_png,loading_bar1_png,label1_png,label2_png,label3_png,label4_png,label5_png,label6_png,label7_png,label8_png,label9_png,page3_5_png,page6_4_png,label0_png,bg1_png,bg2_png",
+			"keys": "description_json,btn1_png,btn2_png,btn3_png,page1_1_png,page1_2_png,page1_3_png,page1_4_png,page1_5_png,page2_4_png,page2_5_png,page2_6_png,page2_7_png,page3_2_png,page4_2_png,page4_3_png,page5_2_png,page5_3_png,page6_2_png,page7_1_png,page7_2_png,page7_3_png,page7_4_png,page7_5_png,bg_jpg,round_json,round_png,car_json,car_png,page7_6_png,page7_7_png,long_png,long_json,ka_png,ka_json,page3_3_png,page3_4_png,longnext_png,longnext_json,kanext_png,kanext_json,dust_json,dust_png,share_jpg,bg_mp3,page6_3_png,loading_bar2_png,loading_bar1_png,label1_png,label2_png,label3_png,label4_png,label5_png,label6_png,label7_png,label8_png,label9_png,page3_5_png,page6_4_png,label0_png,bg1_png,bg2_png",
 			"name": "preload"
 		}
 	],
@@ -52,21 +52,6 @@
 			"name": "page1_5_png"
 		},
 		{
-			"url": "assets/page2_1.png",
-			"type": "image",
-			"name": "page2_1_png"
-		},
-		{
-			"url": "assets/page2_2.png",
-			"type": "image",
-			"name": "page2_2_png"
-		},
-		{
-			"url": "assets/page2_3.png",
-			"type": "image",
-			"name": "page2_3_png"
-		},
-		{
 			"url": "assets/page2_4.png",
 			"type": "image",
 			"name": "page2_4_png"
@@ -87,19 +72,9 @@
 			"name": "page2_7_png"
 		},
 		{
-			"url": "assets/page3_1.png",
-			"type": "image",
-			"name": "page3_1_png"
-		},
-		{
 			"url": "assets/page3_2.png",
 			"type": "image",
 			"name": "page3_2_png"
-		},
-		{
-			"url": "assets/page4_1.png",
-			"type": "image",
-			"name": "page4_1_png"
 		},
 		{
 			"url": "assets/page4_2.png",
@@ -112,11 +87,6 @@
 			"name": "page4_3_png"
 		},
 		{
-			"url": "assets/page5_1.png",
-			"type": "image",
-			"name": "page5_1_png"
-		},
-		{
 			"url": "assets/page5_2.png",
 			"type": "image",
 			"name": "page5_2_png"
@@ -125,11 +95,6 @@
 			"url": "assets/page5_3.png",
 			"type": "image",
 			"name": "page5_3_png"
-		},
-		{
-			"url": "assets/page6_1.png",
-			"type": "image",
-			"name": "page6_1_png"
 		},
 		{
 			"url": "assets/page6_2.png",
