@@ -555,9 +555,9 @@ var GameScene = (function (_super) {
         this._navigation.anchorOffsetY = this._navigation.height / 2;
         this._navigation.x = 200;
         this._navigation.y = 388;
+        this._navigation.touchEnabled = true;
         this._navigation.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.navDown, this);
         this._navigation.addEventListener(egret.TouchEvent.TOUCH_END, this.navUp, this);
-        this._navigation.touchEnabled = true;
         egret.Tween.get(this._navigation, { loop: true })
             .to({ scaleX: 1.2, scaleY: 0.8 }, 300)
             .to({ scaleX: 1, scaleY: 1 }, 300).wait(100);
@@ -583,8 +583,8 @@ var GameScene = (function (_super) {
         var maxY = Const.SHEIGHT / 2 + 250;
         if (x >= minX && x <= minY && y >= minY && y <= maxY) {
             egret.Tween.pauseTweens(this._navigation);
+            this._isCollide = true;
             this.removeChild(this._navigation);
-            this._navigation = ResourceUtils.createBitmapByName('page4_3_png');
             this._car.addChild(this._navigation);
             this._navigation.scaleX = 1.428;
             this._navigation.scaleY = 1.428;
@@ -595,7 +595,6 @@ var GameScene = (function (_super) {
             egret.Tween.get(this._navigation, { loop: true })
                 .to({ scaleX: 1.6, scaleY: 1.3 }, 300)
                 .to({ scaleX: 1.428, scaleY: 1.428 }, 300).wait(100);
-            this._isCollide = true;
         }
         else {
             this._navigation.x = 200;
@@ -835,7 +834,7 @@ var GameScene = (function (_super) {
         var label = new egret.TextField();
         this.addChild(label);
         label.width = 120;
-        label.x = Const.SWIDTH - 363;
+        label.x = Const.SWIDTH - 368;
         label.y = 512;
         label.textColor = 0xf3382f;
         label.size = 20;
