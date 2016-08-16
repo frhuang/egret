@@ -15,7 +15,7 @@ var Main = (function (_super) {
         //初始化Resource资源加载库
         //initiate Resource loading library
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-        RES.loadConfig("resource/default.res.json", "resource/");
+        RES.loadConfig("resource/default.res.json", "http://img.xhangjia.com/h5/2016/08/olympic/");
     };
     p.initLoading = function () {
         this.loadingView = new LoadingUI();

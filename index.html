@@ -20,6 +20,10 @@
         body{
             max-width: 750px;
         }
+        audio{
+            width: 0;
+            height: 0;
+        }
     </style>
 
     <!--这个标签为通过egret提供的第三方库的方式生成的 javascript 文件。删除 modules_files 标签后，库文件加载列表将不会变化，请谨慎操作！-->
@@ -50,7 +54,6 @@
 	<!--game_files_end-->
 </head>
 <body>
-    <div style="display:none"><img src="./resource/share.jpg" /></div>
     <div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
          data-entry-class="Main"
          data-orientation="auto"
@@ -63,6 +66,24 @@
          data-show-fps="false" data-show-log="false"
          data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
+    <audio preload="auto" autoplay loop="true" id="audio-bgm">
+        <source src="http://img.xhangjia.com/h5/2016/08/olympic/assets/bg.mp3">
+    </audio>
+    <audio preload="auto" id="audio-1">
+        <source src="http://img.xhangjia.com/h5/2016/08/olympic/assets/media/1.mp3">
+    </audio>
+    <audio preload="auto" id="audio-2">
+        <source src="http://img.xhangjia.com/h5/2016/08/olympic/assets/media/2.mp3">
+    </audio>
+    <audio preload="auto" id="audio-3">
+        <source src="http://img.xhangjia.com/h5/2016/08/olympic/assets/media/3.mp3">
+    </audio>
+    <audio preload="auto" id="audio-4">
+        <source src="http://img.xhangjia.com/h5/2016/08/olympic/assets/media/4.mp3">
+    </audio>
+    <audio preload="auto" id="audio-5">
+        <source src="http://img.xhangjia.com/h5/2016/08/olympic/assets/media/5.mp3">
+    </audio>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="./zepto.min.js"></script>
     <script>
@@ -75,7 +96,30 @@
         egret.runEgret({renderMode:"webgl", audioType:0});
 
         function receiveAward(){
-            alert("领取成功");
+            location.href = "http://dwz.cn/3VD99D";
+        }
+        function playBgm(isPlay) {
+            if(isPlay) {
+                $('#audio-bgm')[0].play();
+            }else{
+                $('#audio-bgm')[0].pause();
+            }
+        }
+        $(document).ready(function() {
+            $('#audio-bgm')[0].volume = 0.6;
+        })
+        function playAudio(num) {
+            if(num === 1) {
+                $("#audio-1")[0].play();
+            }else if(num === 2) {
+                $("#audio-2")[0].play();
+            }else if(num === 3) {
+                $("#audio-3")[0].play();
+            }else if(num === 4) {
+                $("#audio-4")[0].play();
+            }else if(num === 5) {
+                $("#audio-5")[0].play();
+            }
         }
 
         wxShare('金牌“老司机”如何炼成','老司机，呜呜呜～一起去赢金牌！');
@@ -105,7 +149,7 @@
                     title: shareTitle,
                     desc: shareDesc,
                     link: link,
-                    imgUrl: './resource/share.jpg', //分享图标
+                    imgUrl: 'http://img.xhangjia.com/h5/2016/08/olympic/assets/share.jpg', //分享图标
                     success: function () { 
 
                     }
@@ -115,7 +159,7 @@
                 wx.onMenuShareTimeline({
                     title:shareTitle,
                     link: link,
-                    imgUrl: './resource/share.jpg',//分享图标
+                    imgUrl: 'http://img.xhangjia.com/h5/2016/08/olympic/assets/share.jpg',//分享图标
                     success: function () { 
 
                     }

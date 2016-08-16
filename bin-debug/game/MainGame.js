@@ -21,30 +21,20 @@ var MainGame = (function (_super) {
         this._audio.setClick(this.audioCallback.bind(this));
         egret.Tween.get(this._audio, { loop: true })
             .to({ rotation: 360 }, 800);
-        var sound = this._sound = new egret.Sound();
-        //sound 加载完成监听
-        sound.addEventListener(egret.Event.COMPLETE, function (e) {
-            this.initSound();
-        }, this);
-        sound.load("resource/assets/bg.mp3");
         this.gameContainer = new egret.Sprite();
         this.addChild(this.gameContainer);
         this.showStart();
-    };
-    p.initSound = function () {
-        this._channel = this._sound.play(0);
     };
     p.audioCallback = function () {
         if (this._audioStatus) {
             this._audioStatus = false;
             egret.Tween.pauseTweens(this._audio);
-            this._channel.stop();
-            this._channel = null;
+            playBgm(this._audioStatus);
         }
         else {
             this._audioStatus = true;
             egret.Tween.resumeTweens(this._audio);
-            this._channel = this._sound.play(0);
+            playBgm(this._audioStatus);
         }
     };
     p.start = function () {

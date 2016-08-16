@@ -172,12 +172,14 @@ var GameScene = (function (_super) {
         if (this._index === 2) {
             if (this._isTouch1) {
                 this.createCar();
+                playAudio(1);
             }
         }
         else if (this._index === 3 && this._isTouch2) {
             this.page3End();
         }
         else if (this._index === 4 && this._isCollide) {
+            playAudio(3);
             this.page4End();
         }
         else if (this._index === 5 && this._isTouch3) {
@@ -185,6 +187,7 @@ var GameScene = (function (_super) {
         }
         else if (this._index === 6) {
             if (this._input.text != "") {
+                playAudio(5);
                 this.page6Hide();
                 this.page7();
             }
@@ -353,13 +356,13 @@ var GameScene = (function (_super) {
         this._background.run(1000);
         this._labelScroll.visible = false;
         this._round.gotoAndPlay(0, -1);
-        egret.Tween.get(this._car).wait(3000).call(this.fastMove, this);
+        egret.Tween.get(this._car).wait(3500).call(this.fastMove, this);
         this.carStartMove();
     };
     p.fastMove = function () {
         this._background.run(300);
         egret.Tween.get(this._car)
-            .to({ x: Const.SWIDTH + 200 }, 1500, egret.Ease.sineIn)
+            .to({ x: Const.SWIDTH + 200 }, 1800, egret.Ease.sineIn)
             .wait(500)
             .call(this.page3, this);
         egret.Tween.get(this._leftShoe, { loop: true })
@@ -376,7 +379,7 @@ var GameScene = (function (_super) {
     p.page3 = function () {
         this._car.x = -150;
         egret.Tween.get(this._car)
-            .to({ x: 200 }, 1000, egret.Ease.sineOut)
+            .to({ x: 200 }, 1500, egret.Ease.sineOut)
             .call(this.page3Start, this);
         var light = ResourceUtils.createBitmapByName('page3_2_png');
         this.addChild(light);
@@ -385,9 +388,10 @@ var GameScene = (function (_super) {
         this._trafficLight = light;
         var x = Const.SWIDTH - light.width - 60;
         egret.Tween.get(light)
-            .to({ x: x }, 1000, egret.Ease.sineOut);
+            .to({ x: x }, 1500, egret.Ease.sineOut);
     };
     p.page3Start = function () {
+        playAudio(2);
         this._round.stop();
         this.carStop();
         this._background.stop();
@@ -714,6 +718,7 @@ var GameScene = (function (_super) {
             .to({ y: this._round.y + 130 }, 500);
     };
     p.scaleGas = function () {
+        playAudio(4);
         egret.Tween.get(this._car)
             .to({ scaleX: 0.7, scaleY: 0.7, x: 250, y: this._winHeight + 60 }, 500)
             .wait(2000)

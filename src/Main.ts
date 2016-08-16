@@ -27,17 +27,7 @@ class Main extends egret.DisplayObjectContainer {
         RES.loadConfig("resource/default.res.json", "resource/");
         
     }
-    private initLoading() {
-        this.loadingView = new LoadingUI();
-        this.stage.addChild(this.loadingView);
-        
-        //初始化Resource资源加载库
-        //initiate Resource loading library
-        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-        RES.loadConfig("resource/default.res.json", "resource/");
-    }
     
-
     /**
      * 配置文件加载完成,开始预加载preload资源组。
      * configuration file loading is completed, start to pre-load the preload resource group
