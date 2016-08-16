@@ -882,7 +882,7 @@ class GameScene extends egret.DisplayObjectContainer{
         var label:egret.TextField = new egret.TextField();
         this.addChild(label);
         label.width = 120;
-        label.x = Const.SWIDTH - 365;
+        label.x = Const.SWIDTH - 368;
         label.y = 512;
         label.textColor = 0xf3382f;
         label.size = 20;
