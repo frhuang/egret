@@ -22,12 +22,14 @@ class Background extends egret.Sprite {
 
         this._bg3 = ResourceUtils.createBitmapByName('olympic.bg2');
         this.addChild(this._bg3);
-        this._bg3.x = this._width - 100;
+        this._bg3.x = this._width*2 - 100;
         this._bg3.y =  Const.SHEIGHT / 2 - 250;
     }
     public run(time:number):void{
         egret.Tween.pauseTweens(this._bg1);
         egret.Tween.pauseTweens(this._bg2);
+        egret.Tween.pauseTweens(this._bg3);
+        this.reset();
         var changeBg1 = ():void => {
             this._bg1.x = this._width-1;
             bgRun1(2 * time);
@@ -37,8 +39,8 @@ class Background extends egret.Sprite {
             bgRun2(2*time);
         }
         var changeBg3 = ():void => {
-            this._bg3.x = this._width-100;
-            bgRun3(2*time);
+            this._bg3.x = this._width*2 - 100;
+            bgRun3(3*time);
         }
         var bgRun1 = (t):void => {
             egret.Tween.get(this._bg1)
@@ -59,7 +61,7 @@ class Background extends egret.Sprite {
         
         bgRun1(time);
         bgRun2(2*time);
-        bgRun3(2*time);
+        bgRun3(3*time);
     }
     
     public stop():void{
@@ -71,6 +73,6 @@ class Background extends egret.Sprite {
     public reset():void{
         this._bg1.x = 0;
         this._bg2.x = this._width;
-        this._bg3.x = this._width - 100;
+        this._bg3.x = this._width*2 - 100;
     }
 }

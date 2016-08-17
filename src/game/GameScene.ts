@@ -408,7 +408,10 @@ class GameScene extends egret.DisplayObjectContainer{
     }
     //触摸松开
     private touchEnd(e:egret.TouchEvent) {
-        if(this._index === 3){
+        if(this._index === 2){
+            this._touchStatus1 = false;
+            this._touchStatus2 = false;
+        }else if(this._index === 3){
             this._touchStatus3 = false;
         }else if(this._index === 7) {
             this._share.visible = false;
@@ -522,8 +525,10 @@ class GameScene extends egret.DisplayObjectContainer{
         var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
         var mc:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData( "longnext" ) );
         this.addChild(mc);  
-        mc.x = this._winWidth - 30 ;
-        mc.y = this._winHeight - 183;
+        mc.anchorOffsetX = mc.width / 2;
+        mc.anchorOffsetY = mc.height / 2;
+        mc.x = this._winWidth - 30 + mc.width / 2 ;
+        mc.y = this._winHeight - 183 + mc.height / 2;
         mc.frameRate = 10;
         mc.gotoAndPlay(0, -1);
         this._longMovie2 = mc;
@@ -550,8 +555,10 @@ class GameScene extends egret.DisplayObjectContainer{
         var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
         var mc:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData( "kanext" ) );
         this.addChild(mc);  
-        mc.x = this._winWidth*2 - 180;
-        mc.y = this._winHeight - 180;
+        mc.x = this._winWidth*2 - 180 + mc.width / 2;
+        mc.y = this._winHeight - 180 + mc.height / 2;
+        mc.anchorOffsetX = mc.width / 2;
+        mc.anchorOffsetY = mc.height / 2;
         mc.frameRate = 6;
         mc.gotoAndPlay(0, -1); 
         this._kaMovie2 = mc;
@@ -597,10 +604,10 @@ class GameScene extends egret.DisplayObjectContainer{
                 }, this);
             egret.Tween.get(this._longMovie2) 
                 .wait(1800)
-                .to({scaleX: 0, scaleY:0, x: Const.SWIDTH - 200, y: this._winHeight + 100}, 1000);
+                .to({scaleX: 0, scaleY:0, x: Const.SWIDTH - 200, y: this._winHeight + 100, rotation: 360}, 1000);
             egret.Tween.get(this._kaMovie2) 
                 .wait(1800)
-                .to({scaleX: 0, scaleY: 0, x: Const.SWIDTH - 200, y: this._winHeight + 100}, 1000);
+                .to({scaleX: 0, scaleY: 0, x: Const.SWIDTH - 200, y: this._winHeight + 100, rotation: 360}, 1000);
         }else if(this._selectType === 2) {
             this._background.run(3000);
             var y = this._car.y;
@@ -611,10 +618,10 @@ class GameScene extends egret.DisplayObjectContainer{
             egret.Tween.get(this._leftShoe, {loop: true})
             .to({rotation:360}, 800);
             egret.Tween.get(this._car)
-                .to({rotation: 26}, 800)
-                .to({rotation: 30, x: x + 50, y: y + 40}, 500)
-                .to({rotation: 28, x: x + 100, y: y + 80}, 500)
-                .to({rotation: 26, x: x + 150, y: y + 120}, 300)
+                .to({rotation: 22}, 800)
+                .to({rotation: 28, x: x + 50, y: y + 40}, 500)
+                .to({rotation: 26, x: x + 100, y: y + 80}, 500)
+                .to({rotation: 24, x: x + 150, y: y + 120}, 300)
                 .to({rotation: 22, x: x + 200, y: y + 160}, 300)
                 .to({rotation: 18, x: x + 250, y: y + 180}, 300)
                 .to({rotation: 14, x: x + 300, y: y + 200}, 300)
@@ -630,9 +637,9 @@ class GameScene extends egret.DisplayObjectContainer{
         
     }
     private moveToPage4():void{
-        this.removeChild(this._virtualLine);
-        this.removeChild(this._longMovie2);
-        this.removeChild(this._kaMovie2);
+        this._virtualLine.visible = false;
+        this._longMovie2.visible = false;
+        this._kaMovie2.visible = false;
         this._background.run(300);
         this._labelScroll.visible = false;
         egret.Tween.get(this._car)
@@ -717,10 +724,10 @@ class GameScene extends egret.DisplayObjectContainer{
         this._touchStatus4 = false;
         var x = e.stageX;
         var y = e.stageY;
-        var minX = 100;
-        var maxX = 350;
-        var minY = Const.SHEIGHT / 2 - 100;
-        var maxY = Const.SHEIGHT / 2 + 250;
+        var minX = 60;
+        var maxX = 400;
+        var minY = Const.SHEIGHT / 2 - 150;
+        var maxY = Const.SHEIGHT / 2 + 300;
         if(x >= minX && x <= minY && y >= minY && y<= maxY){
             egret.Tween.pauseTweens(this._navigation);
             this._isCollide = true;
