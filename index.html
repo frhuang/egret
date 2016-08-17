@@ -35,19 +35,21 @@
 	<script egret="lib" src="libs/modules/res/res.js" src-release="libs/modules/res/res.min.js"></script>
 	<script egret="lib" src="libs/modules/tween/tween.js" src-release="libs/modules/tween/tween.min.js"></script>
 	<!--modules_files_end-->
-
+    
+    <!--<script src="http://img.xhangjia.com/h5/2016/08/olympic/build/libs.min.js"></script>-->
+    <!--<script src="http://img.xhangjia.com/h5/2016/08/olympic/build/main.min.js?123456"></script>-->
     <!--这个标签为不通过egret提供的第三方库的方式使用的 javascript 文件，请将这些文件放在libs下，但不要放在modules下面。-->
     <!--other_libs_files_start-->
     <!--other_libs_files_end-->
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
-	<script egret="game" src="bin-debug/LoadingUI.js"></script>
-	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/game/Background.js"></script>
 	<script egret="game" src="bin-debug/game/GameScene.js"></script>
 	<script egret="game" src="bin-debug/game/GameStart.js"></script>
 	<script egret="game" src="bin-debug/game/MainGame.js"></script>
+	<script egret="game" src="bin-debug/LoadingUI.js"></script>
+	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/utils/Consts.js"></script>
 	<script egret="game" src="bin-debug/utils/MyButton.js"></script>
 	<script egret="game" src="bin-debug/utils/ResourceUtils.js"></script>
@@ -67,7 +69,7 @@
          data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
     <audio preload="auto" autoplay loop="true" id="audio-bgm">
-        <source src="http://img.xhangjia.com/h5/2016/08/olympic/assets/bg.mp3">
+        <source src="http://img.xhangjia.com/h5/2016/08/olympic/assets/media/bg.mp3">
     </audio>
     <audio preload="auto" id="audio-1">
         <source src="http://img.xhangjia.com/h5/2016/08/olympic/assets/media/1.mp3">
@@ -85,7 +87,7 @@
         <source src="http://img.xhangjia.com/h5/2016/08/olympic/assets/media/5.mp3">
     </audio>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="./zepto.min.js"></script>
+    <script src="http://img.xhangjia.com/h5/2016/08/olympic/build/zepto.min.js"></script>
     <script>
         /**
          * {
@@ -94,31 +96,42 @@
          * }
          **/
         egret.runEgret({renderMode:"webgl", audioType:0});
-
+        
+        var audioBgm = document.getElementById("audio-bgm");
         function receiveAward(){
             location.href = "http://dwz.cn/3VD99D";
         }
         function playBgm(isPlay) {
             if(isPlay) {
-                $('#audio-bgm')[0].play();
+                audioBgm.play();
             }else{
-                $('#audio-bgm')[0].pause();
+                audioBgm.pause();
             }
         }
-        $(document).ready(function() {
-            $('#audio-bgm')[0].volume = 0.6;
-        })
+        $(function(){
+            audioBgm.volume = 0.3;
+        });
+
+        function voiceBig() {
+            audioBgm.volume = 0.3;
+        }
         function playAudio(num) {
+            $('#audio-bgm')[0].volume = 0.05;
             if(num === 1) {
                 $("#audio-1")[0].play();
+                setTimeout(voiceBig, 6000);
             }else if(num === 2) {
                 $("#audio-2")[0].play();
+                setTimeout(voiceBig, 4000);
             }else if(num === 3) {
                 $("#audio-3")[0].play();
+                setTimeout(voiceBig, 3000);
             }else if(num === 4) {
                 $("#audio-4")[0].play();
+                setTimeout(voiceBig, 2000);
             }else if(num === 5) {
                 $("#audio-5")[0].play();
+                setTimeout(voiceBig, 3000);
             }
         }
 

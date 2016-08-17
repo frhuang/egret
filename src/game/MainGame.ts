@@ -20,7 +20,7 @@ class MainGame extends egret.Sprite{
         bg.width = Const.SWIDTH;
         bg.height = Const.SHEIGHT;
         
-        this._audio = new MyButton('page1_3_png', 'page1_3_png');
+        this._audio = new MyButton('olympic.page1_3', 'olympic.page1_3');
         this.addChild(this._audio);
         this._audio.x = Const.SWIDTH - this._audio.width / 2 - 20;
         this._audio.y = 50;

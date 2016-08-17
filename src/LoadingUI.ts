@@ -79,16 +79,7 @@ class LoadingUI extends egret.Sprite {
         this._loadingBar = new egret.Bitmap();
         this.addChild(this._loadingBg);
         this.addChild(this._loadingBar);
-
-         var data = RES.getRes("car_json");//JSON  
-        var txtr:egret.Texture = RES.getRes("car_png");//Texture  
-        var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
-        var mc:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData( "car" ) );
-        this.addChild(mc);  
-        mc.x = width / 2 - mc.width / 2;
-        mc.y = width / 2 - mc.height / 4;
-        mc.frameRate = 12;
-        mc.gotoAndPlay(0, -1); 
+        
     }
     private onComplete(e:egret.Event) {
         var urlLoader:egret.URLLoader = <egret.URLLoader>e.target;

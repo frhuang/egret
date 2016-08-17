@@ -20,7 +20,7 @@ class Background extends egret.Sprite {
         this._bg2.x = this._width-1;
         this._bg2.y = Const.SHEIGHT / 2 - 220;
 
-        this._bg3 = ResourceUtils.createBitmapByName('bg2_png');
+        this._bg3 = ResourceUtils.createBitmapByName('olympic.bg2');
         this.addChild(this._bg3);
         this._bg3.x = this._width - 100;
         this._bg3.y =  Const.SHEIGHT / 2 - 250;

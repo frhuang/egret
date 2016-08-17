@@ -1,46 +1,11 @@
 {
 	"groups": [
 		{
-			"keys": "btn1_png,btn2_png,btn3_png,page1_1_png,page1_2_png,page1_3_png,page1_4_png,page1_5_png,page2_4_png,page2_5_png,page2_6_png,page2_7_png,page3_2_png,page4_2_png,page4_3_png,page5_2_png,page5_3_png,page6_2_png,page7_1_png,page7_2_png,page7_3_png,page7_4_png,page7_5_png,bg_jpg,round_json,round_png,car_json,car_png,page7_6_png,page7_7_png,long_png,long_json,ka_png,ka_json,page3_3_png,page3_4_png,longnext_png,longnext_json,kanext_png,kanext_json,dust_json,dust_png,page6_3_png,loading_bar2_png,loading_bar1_png,label1_png,label2_png,label3_png,label4_png,label5_png,label6_png,label7_png,label8_png,label9_png,page3_5_png,page6_4_png,label0_png,bg1_png,bg2_png",
+			"keys": "page1_5_png,page2_4_png,page2_7_png,page4_2_png,page5_3_png,page6_2_png,page7_1_png,page7_2_png,page7_3_png,page7_4_png,bg_jpg,round_json,round_png,car_json,car_png,page7_6_png,page7_7_png,long_png,long_json,ka_png,ka_json,longnext_png,longnext_json,kanext_png,kanext_json,dust_json,dust_png,loading_bar2_png,loading_bar1_png,label1_png,label2_png,label3_png,label4_png,label5_png,label6_png,label7_png,label8_png,label9_png,label0_png,bg1_png,quan_png,page3_6_png,page3_7_png,label10_png,olympic",
 			"name": "preload"
 		}
 	],
 	"resources": [
-		{
-			"url": "assets/btn1.png",
-			"type": "image",
-			"name": "btn1_png"
-		},
-		{
-			"url": "assets/btn2.png",
-			"type": "image",
-			"name": "btn2_png"
-		},
-		{
-			"url": "assets/btn3.png",
-			"type": "image",
-			"name": "btn3_png"
-		},
-		{
-			"url": "assets/page1_1.png",
-			"type": "image",
-			"name": "page1_1_png"
-		},
-		{
-			"url": "assets/page1_2.png",
-			"type": "image",
-			"name": "page1_2_png"
-		},
-		{
-			"url": "assets/page1_3.png",
-			"type": "image",
-			"name": "page1_3_png"
-		},
-		{
-			"url": "assets/page1_4.png",
-			"type": "image",
-			"name": "page1_4_png"
-		},
 		{
 			"url": "assets/page1_5.png",
 			"type": "image",
@@ -52,39 +17,14 @@
 			"name": "page2_4_png"
 		},
 		{
-			"url": "assets/page2_5.png",
-			"type": "image",
-			"name": "page2_5_png"
-		},
-		{
-			"url": "assets/page2_6.png",
-			"type": "image",
-			"name": "page2_6_png"
-		},
-		{
 			"url": "assets/page2_7.png",
 			"type": "image",
 			"name": "page2_7_png"
 		},
 		{
-			"url": "assets/page3_2.png",
-			"type": "image",
-			"name": "page3_2_png"
-		},
-		{
 			"url": "assets/page4_2.png",
 			"type": "image",
 			"name": "page4_2_png"
-		},
-		{
-			"url": "assets/page4_3.png",
-			"type": "image",
-			"name": "page4_3_png"
-		},
-		{
-			"url": "assets/page5_2.png",
-			"type": "image",
-			"name": "page5_2_png"
 		},
 		{
 			"url": "assets/page5_3.png",
@@ -115,11 +55,6 @@
 			"url": "assets/page7_4.png",
 			"type": "image",
 			"name": "page7_4_png"
-		},
-		{
-			"url": "assets/page7_5.png",
-			"type": "image",
-			"name": "page7_5_png"
 		},
 		{
 			"name": "bg_jpg",
@@ -177,16 +112,6 @@
 			"url": "assets/ka/ka.json"
 		},
 		{
-			"name": "page3_3_png",
-			"type": "image",
-			"url": "assets/page3_3.png"
-		},
-		{
-			"name": "page3_4_png",
-			"type": "image",
-			"url": "assets/page3_4.png"
-		},
-		{
 			"name": "longnext_png",
 			"type": "image",
 			"url": "assets/long/longnext.png"
@@ -215,11 +140,6 @@
 			"name": "dust_png",
 			"type": "image",
 			"url": "assets/car/dust.png"
-		},
-		{
-			"name": "page6_3_png",
-			"type": "image",
-			"url": "assets/page6_3.png"
 		},
 		{
 			"name": "loading_bar2_png",
@@ -277,16 +197,6 @@
 			"url": "assets/label9.png"
 		},
 		{
-			"name": "page3_5_png",
-			"type": "image",
-			"url": "assets/page3_5.png"
-		},
-		{
-			"name": "page6_4_png",
-			"type": "image",
-			"url": "assets/page6_4.png"
-		},
-		{
 			"name": "label0_png",
 			"type": "image",
 			"url": "assets/label0.png"
@@ -297,9 +207,30 @@
 			"url": "assets/bg1.png"
 		},
 		{
-			"name": "bg2_png",
+			"name": "quan_png",
 			"type": "image",
-			"url": "assets/bg2.png"
+			"url": "assets/quan.png"
+		},
+		{
+			"name": "page3_6_png",
+			"type": "image",
+			"url": "assets/page3_6.png"
+		},
+		{
+			"name": "page3_7_png",
+			"type": "image",
+			"url": "assets/page3_7.png"
+		},
+		{
+			"name": "label10_png",
+			"type": "image",
+			"url": "assets/label10.png"
+		},
+		{
+			"name": "olympic",
+			"type": "sheet",
+			"url": "assets/olympic.json",
+			"subkeys": "btn1,bg2,page1_2,page1_3,page1_1,page2_5,page2_6,page3_2,page3_3,page3_4,page3_8,page3_9,page6_3,page6_4,page7_5,btn2,btn3,page1_4,page4_3,page5_2,page2_3"
 		}
 	]
 }

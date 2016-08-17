@@ -67,15 +67,6 @@ var LoadingUI = (function (_super) {
         this._loadingBar = new egret.Bitmap();
         this.addChild(this._loadingBg);
         this.addChild(this._loadingBar);
-        var data = RES.getRes("car_json"); //JSON  
-        var txtr = RES.getRes("car_png"); //Texture  
-        var mcFactory = new egret.MovieClipDataFactory(data, txtr);
-        var mc = new egret.MovieClip(mcFactory.generateMovieClipData("car"));
-        this.addChild(mc);
-        mc.x = width / 2 - mc.width / 2;
-        mc.y = width / 2 - mc.height / 4;
-        mc.frameRate = 12;
-        mc.gotoAndPlay(0, -1);
     };
     p.onComplete = function (e) {
         var urlLoader = e.target;

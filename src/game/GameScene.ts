@@ -52,6 +52,10 @@ class GameScene extends egret.DisplayObjectContainer{
     private _labelStatus:boolean = false;
     private _virtualLine:egret.Bitmap;
     private _background:Background;
+    private _isClick:boolean = true;
+    private _btn1:MyButton;
+    private _btn2:MyButton;
+    private _selectType:number = 1;
     constructor() {
         super(); 
         this.addEventListener(egret.Event.ADDED_TO_STAGE,this.onAddToStage,this);
@@ -68,9 +72,8 @@ class GameScene extends egret.DisplayObjectContainer{
 
         this._background = new Background();
         this.addChild(this._background);
-        // this._background.run(1000);
 
-        var du:egret.Bitmap = ResourceUtils.createBitmapByName('page1_4_png');
+        var du:egret.Bitmap = ResourceUtils.createBitmapByName('olympic.page1_4');
         this.addChild(du);
         du.x = width - du.width / 2;
         du.y = 25;
@@ -78,7 +81,7 @@ class GameScene extends egret.DisplayObjectContainer{
 
         var mask:egret.Shape = new egret.Shape();
         mask.graphics.beginFill(0x000000);
-        mask.graphics.drawRect(0,100,width*2,280);
+        mask.graphics.drawRect(0,100,width*2,320);
         mask.graphics.endFill();
         this.addChild(mask);
 
@@ -112,13 +115,13 @@ class GameScene extends egret.DisplayObjectContainer{
         this._car.y = height;
         
 
-        var confirm_btn:MyButton = new MyButton("btn2_png", "btn2_png");
+        var confirm_btn:MyButton = new MyButton("olympic.btn2", "olympic.btn2");
         this.addChild(confirm_btn);
         confirm_btn.x = width - confirm_btn.width / 2 - 120;
         confirm_btn.y = Const.SHEIGHT - 200;
         confirm_btn.setClick(this.confirmClick.bind(this));
 
-        var redraw_btn:MyButton = new MyButton("btn3_png", "btn3_png");
+        var redraw_btn:MyButton = new MyButton("olympic.btn3", "olympic.btn3");
         this.addChild(redraw_btn);
         redraw_btn.x = width  - redraw_btn.width / 2 + 120;
         redraw_btn.y = Const.SHEIGHT - 200;
@@ -135,7 +138,7 @@ class GameScene extends egret.DisplayObjectContainer{
         mc.y = height + 172;
         this._round = mc;
 
-        var tips:egret.Bitmap = ResourceUtils.createBitmapByName('page2_3_png');
+        var tips:egret.Bitmap = ResourceUtils.createBitmapByName('olympic.page2_3');
         this.addChild(tips);
         tips.x = width - tips.width / 2;
         tips.y = height + 270;
@@ -156,7 +159,7 @@ class GameScene extends egret.DisplayObjectContainer{
         drawArea.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.drawMove, this);
         drawArea.addEventListener(egret.TouchEvent.TOUCH_END, this.drawEnd, this);
 
-        var leftShoe = ResourceUtils.createBitmapByName("page2_5_png");
+        var leftShoe = ResourceUtils.createBitmapByName("olympic.page2_5");
         this._car.addChild(leftShoe);
         leftShoe.x = width - 130;
         leftShoe.y = height - leftShoe.height / 2 + 202;
@@ -164,7 +167,7 @@ class GameScene extends egret.DisplayObjectContainer{
         leftShoe.anchorOffsetY = leftShoe.height / 2;
         this._leftShoe = leftShoe;
 
-        var rightShoe = ResourceUtils.createBitmapByName("page2_6_png");
+        var rightShoe = ResourceUtils.createBitmapByName("olympic.page2_6");
         this._car.addChild(rightShoe);
         rightShoe.x = width + 130;
         rightShoe.y = height - rightShoe.height / 2  + 202;
@@ -186,7 +189,7 @@ class GameScene extends egret.DisplayObjectContainer{
     }
     //对话
     private addLabel(param:string, index:number) {
-        if(index > 9) return;
+        if(index > 10) return;
         var y = this._labelNextY;
         var label:egret.Bitmap = ResourceUtils.createBitmapByName(param);
         this._labelScroll.addChild(label);
@@ -197,8 +200,8 @@ class GameScene extends egret.DisplayObjectContainer{
             this._labelPosY = label.height + 170;
         }else {
             label.y = this._labelPosY;
-            this._labelNextY = this._labelNextY + label.height + 20;
-            this._labelPosY = this._labelPosY + label.height + 20;
+            this._labelNextY = this._labelNextY + label.height + 18;
+            this._labelPosY = this._labelPosY + label.height + 18;
         }
 
         label.alpha = 0;
@@ -209,13 +212,68 @@ class GameScene extends egret.DisplayObjectContainer{
                 .to({y: -y}, 800, egret.Ease.sineIn);
         }
         if(index === 9) {
-            var down:egret.Bitmap = ResourceUtils.createBitmapByName('page6_4_png');
+            var down:egret.Bitmap = ResourceUtils.createBitmapByName('olympic.page6_4');
             this._labelScroll.addChild(down);
             down.x = Const.SWIDTH - 180;
             down.y = label.y + 20;
             egret.Tween.get(down, {loop: true})
                 .to({y: down.y + 10}, 400)
                 .to({y: down.y - 10}, 400)
+        }else if(index === 10) {
+            var btn1:MyButton = new MyButton("olympic.page3_8", "olympic.page3_8");
+            this._labelScroll.addChild(btn1)
+            btn1.anchorOffsetX = btn1.width / 2 ;
+            btn1.anchorOffsetY = btn1.height / 2 ;
+            btn1.x = Const.SWIDTH - 105;
+            btn1.y = label.y + 90;
+            btn1.setClick(this.selectFight.bind(this, 1));
+            this._btn1 = btn1;
+            var btn2:MyButton = new MyButton("olympic.page3_8", "olympic.page3_8");
+            this._labelScroll.addChild(btn2)
+            btn2.anchorOffsetX = btn1.width / 2 ;
+            btn2.anchorOffsetY = btn1.height / 2 ;
+            btn2.x = Const.SWIDTH - 105;
+            btn2.y = label.y + 150;
+            btn2.setClick(this.selectFight.bind(this, 2));
+            this._btn2 = btn2;
+        }
+    }
+    private selectFight(num:number){
+        if(this._isClick && num) {
+            this._selectType = num;
+            this._isClick = false;
+            var btn:egret.Bitmap = ResourceUtils.createBitmapByName('olympic.page3_9');
+            this._labelScroll.addChild(btn);
+            btn.anchorOffsetX = btn.width / 2;
+            btn.anchorOffsetY = btn.height /2;
+            if(num === 1) {
+                btn.x = this._btn1.x;
+                btn.y = this._btn1.y;
+                var tips:egret.Bitmap = ResourceUtils.createBitmapByName('page3_6_png');
+                this.addChild(tips);
+                tips.x = this._winWidth - tips.width /2;
+                tips.y = this._winHeight + 170;
+                tips.alpha = 0;
+                this._virtualLine = tips;
+                egret.Tween.get(tips, {loop: true})
+                    .to({alpha: 1}, 600)
+                    .wait(1000)
+                    .to({alpha: 0}, 600);
+            } else if(num === 2) {
+                btn.x = this._btn2.x;
+                btn.y = this._btn2.y;
+                var tips:egret.Bitmap = ResourceUtils.createBitmapByName('page3_7_png');
+                this.addChild(tips);
+                tips.x = this._winWidth - tips.width /2;
+                tips.y = this._winHeight + 170;
+                tips.alpha = 0;
+                this._virtualLine = tips;
+                egret.Tween.get(tips, {loop: true})
+                    .to({alpha: 1}, 600)
+                    .wait(1000)
+                    .to({alpha: 0}, 600);
+            }
+            this.page3ReadyToDraw();
         }
     }
     //确认按钮
@@ -418,7 +476,7 @@ class GameScene extends egret.DisplayObjectContainer{
         egret.Tween.get(this._car)
             .to({x: 200}, 1500, egret.Ease.sineOut)
             .call(this.page3Start, this);
-        var light = ResourceUtils.createBitmapByName('page3_2_png');
+        var light = ResourceUtils.createBitmapByName('olympic.page3_2');
         this.addChild(light);
         light.x = Const.SWIDTH;
         light.y = Const.SHEIGHT/2 - 150;
@@ -443,7 +501,7 @@ class GameScene extends egret.DisplayObjectContainer{
     }
     //增加火龙动画
     private addLongAnimate():void{
-        this._trafficLight.texture = RES.getRes("page3_3_png");
+        this._trafficLight.texture = RES.getRes("olympic.page3_3");
         var data = RES.getRes("long_json");//JSON  
         var txtr:egret.Texture = RES.getRes("long_png");//Texture  
         var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
@@ -472,7 +530,7 @@ class GameScene extends egret.DisplayObjectContainer{
     }
     //增加比卡丘动画
     private addKaAnimate():void{
-        this._trafficLight.texture = RES.getRes("page3_4_png");
+        this._trafficLight.texture = RES.getRes("olympic.page3_4");
         var data = RES.getRes("ka_json");//JSON  
         var txtr:egret.Texture = RES.getRes("ka_png");//Texture  
         var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
@@ -505,9 +563,7 @@ class GameScene extends egret.DisplayObjectContainer{
         .wait(100)
         .call(this.addLabel, this, ["label1_png", 1])
         .wait(1800)
-        .call(this.addLabel, this, ["label2_png", 2])
-        .wait(1000)
-        .call(this.page3ReadyToDraw, this);
+        .call(this.addLabel, this, ["label10_png", 10]);
     }
     private page3ReadyToDraw() {
         this._index = 3;
@@ -515,48 +571,91 @@ class GameScene extends egret.DisplayObjectContainer{
         this.addChild(this._lineShape);
         this._lineShape.graphics.lineStyle(5, 0x777574);
         this.btnShow();
-        var line = ResourceUtils.createBitmapByName('page3_5_png');
-        this.addChild(line);
-        line.x = Const.SWIDTH - line.width - 20;
-        line.y = this._winHeight + 200;
-        egret.Tween.get(line, {loop: true})
-        .to({alpha: 0}, 400)
-        .to({alpha: 1}, 400);
-        this._virtualLine = line;
     }
     private page3End():void{
         this.btnHide();
-        this._background.run(3000);
-        var y = this._car.y;
-        var x = this._car.x;
-        this.carStartMove();
-        egret.Tween.get(this._rightShoe, {loop:true})
-        .to({rotation:360}, 800);
-        egret.Tween.get(this._leftShoe, {loop: true})
-        .to({rotation:360}, 800);
+        if(this._selectType === 1){
+            this._lineShape.graphics.clear();
+            var xuanwo:egret.Bitmap = ResourceUtils.createBitmapByName('quan_png');
+            this.addChild(xuanwo);
+            xuanwo.anchorOffsetX = xuanwo.width / 2;
+            xuanwo.anchorOffsetY = xuanwo.height / 2;
+            xuanwo.x = Const.SWIDTH - 200;
+            xuanwo.y = this._winHeight + 100;
+            xuanwo.scaleX = 0.1;
+            xuanwo.scaleY = 0.1;
+            egret.Tween.get(xuanwo, {loop: true})
+                .to({rotation: 360}, 300);
+            egret.Tween.get(xuanwo)
+                .to({scaleX: 1, scaleY: 1}, 1500)
+                .wait(1300)
+                .to({alpha: 0, scaleX: 0, scaleY: 0}, 1000)
+                .wait(200)
+                .call(() => {
+                    this.removeChild(xuanwo);
+                    this.moveToPage4();
+                }, this);
+            egret.Tween.get(this._longMovie2) 
+                .wait(1800)
+                .to({scaleX: 0, scaleY:0, x: Const.SWIDTH - 200, y: this._winHeight + 100}, 1000);
+            egret.Tween.get(this._kaMovie2) 
+                .wait(1800)
+                .to({scaleX: 0, scaleY: 0, x: Const.SWIDTH - 200, y: this._winHeight + 100}, 1000);
+        }else if(this._selectType === 2) {
+            this._background.run(3000);
+            var y = this._car.y;
+            var x = this._car.x;
+            this.carStartMove();
+            egret.Tween.get(this._rightShoe, {loop:true})
+            .to({rotation:360}, 800);
+            egret.Tween.get(this._leftShoe, {loop: true})
+            .to({rotation:360}, 800);
+            egret.Tween.get(this._car)
+                .to({rotation: 26}, 800)
+                .to({rotation: 30, x: x + 50, y: y + 40}, 500)
+                .to({rotation: 28, x: x + 100, y: y + 80}, 500)
+                .to({rotation: 26, x: x + 150, y: y + 120}, 300)
+                .to({rotation: 22, x: x + 200, y: y + 160}, 300)
+                .to({rotation: 18, x: x + 250, y: y + 180}, 300)
+                .to({rotation: 14, x: x + 300, y: y + 200}, 300)
+                .to({rotation: 10, x: x + 350, y: y + 220}, 300)
+                .to({rotation: 6, x: x + 450, y: y + 230}, 300)
+                .to({rotation: 2, x: x + 580, y: y + 230}, 300)
+                .to({rotation: 0, x: x + 660, y: y + 230}, 300)
+                .to({x: x + 800, y: y + 280}, 300)
+                .wait(500)
+                .call(this.page4, this);
+            this.carStartMove();
+        }
+        
+    }
+    private moveToPage4():void{
+        this.removeChild(this._virtualLine);
+        this.removeChild(this._longMovie2);
+        this.removeChild(this._kaMovie2);
+        this._background.run(300);
+        this._labelScroll.visible = false;
         egret.Tween.get(this._car)
-            .to({rotation: 26}, 800)
-            .to({rotation: 30, x: x + 50, y: y + 40}, 500)
-            .to({rotation: 28, x: x + 100, y: y + 80}, 500)
-            .to({rotation: 26, x: x + 150, y: y + 120}, 300)
-            .to({rotation: 22, x: x + 200, y: y + 160}, 300)
-            .to({rotation: 18, x: x + 250, y: y + 180}, 300)
-            .to({rotation: 14, x: x + 300, y: y + 200}, 300)
-            .to({rotation: 10, x: x + 350, y: y + 220}, 300)
-            .to({rotation: 6, x: x + 450, y: y + 230}, 300)
-            .to({rotation: 2, x: x + 580, y: y + 230}, 300)
-            .to({rotation: 0, x: x + 660, y: y + 230}, 300)
-            .to({x: x + 800, y: y + 280}, 300)
+            .to({x: Const.SWIDTH + 200}, 2000, egret.Ease.sineIn)
             .wait(500)
             .call(this.page4, this);
-        this.carStartMove();
+        egret.Tween.get(this._leftShoe, {loop: true})
+            .to({rotation: 360}, 400);
+        egret.Tween.get(this._rightShoe, {loop: true})
+            .to({rotation: 360}, 400);
+        egret.Tween.pauseTweens(this._shape);
+        egret.Tween.get(this._shape)
+            .to({skewX: -30}, 600)
+        egret.Tween.get(this._shape, {loop: true})
+            .to({y: this._shape.y + 3}, 100)
+            .to({y: this._shape.y - 3}, 100);
     }
     private page4():void{
         this.removeChild(this._virtualLine);
-        this._labelScroll.visible = false;
-        this._lineShape.graphics.clear();
         this.removeChild(this._longMovie2);
         this.removeChild(this._kaMovie2);
+        this._labelScroll.visible = false;
+        this._lineShape.graphics.clear();
         this.removeChild(this._trafficLight);
         this._car.x  = -100;
         this._car.y = Const.SHEIGHT *0.5 + 60;
@@ -589,7 +688,7 @@ class GameScene extends egret.DisplayObjectContainer{
             .call(this.page4Ready, this);
     }
     private addNavigation():void{
-        this._navigation = ResourceUtils.createBitmapByName('page4_3_png');
+        this._navigation = ResourceUtils.createBitmapByName('olympic.page4_3');
         this.addChild(this._navigation);
         this._navigation.anchorOffsetX = this._navigation.width / 2;
         this._navigation.anchorOffsetY = this._navigation.height / 2;
@@ -790,7 +889,7 @@ class GameScene extends egret.DisplayObjectContainer{
         this._milestone.x = Const.SWIDTH;
         this._milestone.y = Const.SHEIGHT / 2 - this._milestone.height / 2 + 60;
 
-        this._page6Title = ResourceUtils.createBitmapByName('page6_3_png');
+        this._page6Title = ResourceUtils.createBitmapByName('olympic.page6_3');
         this.addChild(this._page6Title);
         this._page6Title.x = Const.SWIDTH - this._milestone.width + 90;
         this._page6Title.y = Const.SHEIGHT / 2 + 30;
@@ -903,7 +1002,7 @@ class GameScene extends egret.DisplayObjectContainer{
         title3.anchorOffsetX = title3.width / 2;
         title3.anchorOffsetY = title3.height / 2;
 
-        var title1:egret.Bitmap = ResourceUtils.createBitmapByName('page7_5_png');
+        var title1:egret.Bitmap = ResourceUtils.createBitmapByName('olympic.page7_5');
         this.addChild(title1);
         title1.x = w;
         title1.y = Const.SHEIGHT - 280;

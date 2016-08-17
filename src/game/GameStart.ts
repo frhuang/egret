@@ -7,7 +7,7 @@ class GameStart extends egret.Sprite{
         var width = Const.SWIDTH / 2;
         var height = Const.SHEIGHT;
 
-        var du:egret.Bitmap = ResourceUtils.createBitmapByName('page1_4_png');
+        var du:egret.Bitmap = ResourceUtils.createBitmapByName('olympic.page1_4');
         this.addChild(du);
         du.x = width - du.width / 2;
         du.y = 20;
@@ -28,7 +28,7 @@ class GameStart extends egret.Sprite{
         mc.gotoAndPlay(0, -1); 
 
     
-        var start_btn:MyButton = new MyButton("btn1_png", "btn1_png");
+        var start_btn:MyButton = new MyButton("olympic.btn1", "olympic.btn1");
         this.addChild(start_btn);
         start_btn.x = width;
         start_btn.y = height - 260;
@@ -40,12 +40,12 @@ class GameStart extends egret.Sprite{
             .to({rotation: -6}, 300)
             .to({rotation: 0}, 300);
 
-        var start_title:egret.Bitmap = ResourceUtils.createBitmapByName("page1_1_png");
+        var start_title:egret.Bitmap = ResourceUtils.createBitmapByName("olympic.page1_1");
         this.addChild(start_title);
         start_title.x = width - start_title.width / 2;
         start_title.y = height - 120;
 
-        var finger:egret.Bitmap = ResourceUtils.createBitmapByName('page1_2_png');
+        var finger:egret.Bitmap = ResourceUtils.createBitmapByName('olympic.page1_2');
         this.addChild(finger);
         finger.x = width - finger.width/ 2;
         finger.y = height - 140;
